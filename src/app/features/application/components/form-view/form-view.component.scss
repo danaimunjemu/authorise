@@ -1,0 +1,41 @@
+.authorise-form-label {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.commented-section {
+  background: rgb(255 241 97 / 35%);
+  color: rgba(72, 66, 5, 0.35);
+  font-weight: 500;
+  padding: 0px 5px;
+}
+
+.authorise-form-input {
+  transition-duration: .5s;
+}
+
+.authorise-form-input:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.authorise-editor-button {
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: default;
+  font-size: inherit;
+  line-height: 1;
+  min-height: 2.3em;
+  min-width: 2.3em;
+  text-align: center;
+  transition: box-shadow .2s ease-in-out, border .2s ease-in-out;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #333;
+  transition-duration: .5s;
+}
+
+.authorise-editor-button:hover {
+  background: #f0f0f0;
+  cursor: pointer;
+}

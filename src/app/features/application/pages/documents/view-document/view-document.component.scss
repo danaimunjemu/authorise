@@ -1,0 +1,153 @@
+@import "colours";
+
+.authorise-document-a4-page-container {
+  max-height: calc(100vh - 250px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.authorise-document-a4-page {
+  padding: 12mm 10mm!important;
+  margin: auto;
+  border-radius: 2px;
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  min-height: 297mm;
+  min-height: 297mm;
+  max-width: 21cm;
+  border: 1px solid transparent;
+  page-break-after: always;
+}
+
+.authorise-document-a4-page:active {
+  border: 1px solid $primary1;
+}
+
+.authorise-document-content {
+  //overflow: scroll;
+  //max-height: 297mm;
+}
+
+
+.highlight-comment {
+  background: #fef7a9;
+}
+
+.authorise-editor-toolbar {
+  background: white;
+  padding: 4px;
+  border: 1px solid #ccced1;
+  border-radius: 4px;
+}
+
+.authorise-editor-button {
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: default;
+  font-size: inherit;
+  line-height: 1;
+  min-height: 2.3em;
+  min-width: 2.3em;
+  text-align: center;
+  transition: box-shadow .2s ease-in-out, border .2s ease-in-out;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #333;
+  transition-duration: .5s;
+}
+
+.authorise-editor-button:hover {
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.authorise-document-edit-tools-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  padding: 10px;
+  border-radius: 8px;
+  max-height: calc(100vh - 186px);
+  width: 100%;
+  height: 100%;
+}
+
+.authorise-edit-tab-li {
+  padding: 10px;
+  border-left: 5px solid transparent;
+  transition-duration: .5s;
+  color: rgb(57, 56, 66);
+}
+
+.authorise-edit-tab-li:hover {
+  color: $primary6;
+  cursor: pointer;
+}
+
+.authorise-edit-tab-li-active {
+  border-left: 5px solid $primary6;
+  color: $primary6;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.content-tabs {
+  max-width: fit-content;
+  padding: 0;
+  margin-left: 10px;
+  border-left: 1px solid #DEE2E6;
+}
+
+.authorise-form-builder-tools-content {
+  max-height: calc(100vh - 270px);
+  overflow-y: scroll;
+}
+
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 340px);
+}
+
+.comments-top-section {
+  flex: 1; /* This allows the top div to fill available space */
+  overflow-y: auto; /* Enables scrolling if the content overflows */
+}
+
+.comments-bottom-section {
+
+}
+
+.ant-input {
+  margin: 0px !important;
+}
+
+
+.text-area {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 100px;
+  cursor: text;
+}
+
+.authorise-highlighted-text {
+  font-style: italic;
+}
+
+.authorise-document-a4-page-footer {
+  font-size: 12px;
+  color: $primary3;
+  font-weight: 400;
+}
+
+.authorise-audit-timeline-date {
+  font-size: 10px;
+  color: #b4b4b4;
+  text-align: right;
+}
+
+.doc-owner-space {
+  padding-bottom: 20px;
+}

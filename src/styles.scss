@@ -1,0 +1,134 @@
+// Imports
+@import "colours";
+@import "typography";
+@import "light-theme";
+@import "dark-theme";
+@import "ant-design";
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+// Mode
+
+body.dark {
+  @include darken();
+}
+body.light {
+  @include lighten();
+}
+
+
+/* Scroll Bar Styling */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $primary6;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primary4;
+}
+
+* {
+  font-family: $font-quicksand;
+}
+
+// TYPOGRAPHY
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-quicksand;
+}
+
+p {
+  font-family: $font-quicksand;
+}
+
+.lead-text {
+  font-size: $font-16;
+  font-weight: bold;
+}
+
+.body-16 {
+  font-size: $font-16;
+}
+
+.body-14 {
+  font-size: $font-14;
+}
+
+.block-quotes {
+  font-size: $font-20;
+}
+
+.capitalized {
+  text-transform: uppercase;
+}
+
+.small {
+  font-size: $font-12;
+}
+
+.tiny {
+  font-size: $font-10;
+}
+
+.ant-input {
+  background: transparent;
+}
+
+::selection {
+  background-color: rgb(254, 244, 215);
+  color: rgb(92, 92, 92);
+}
+
+a {
+  text-decoration: unset !important;
+  color: inherit !important;
+}
+
+nz-breadcrumb-item:hover {
+  cursor: pointer;
+}
+
+.placeholder {
+  border-radius: 8px;
+  background: $blackA6;
+}
+
+.authorise-signature-pad {
+  background: transparent !important;
+}
+
+.ant-input-group-addon {
+  position: unset;
+  padding: 0;
+  color: unset;
+  font-weight: unset;
+  font-size: unset;
+  text-align: unset;
+  background-color: unset;
+  border: unset;
+  border-radius: unset;
+}
+
+.ant-popover-title {
+  border-bottom: none;
+}
+
+.remove-padding {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}

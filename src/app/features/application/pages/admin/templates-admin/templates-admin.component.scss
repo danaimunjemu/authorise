@@ -1,0 +1,11 @@
+.page-card {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 0 10px;
+  transition-duration: .8s;
+  height: calc( 100vh - 180px);
+  overflow-y: scroll;
+}
+

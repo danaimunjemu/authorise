@@ -1,0 +1,44 @@
+.status-none {
+  background: #fafafa;
+  color: #000000d9;
+}
+
+.status-created {
+  color: #08979c;
+  background: #e6fffb;
+}
+
+.status-draft {
+  color: #d4b106;
+  background: #feffe6;
+}
+
+.status-pending {
+  color: #d48806;
+  background: #fffbe6;
+}
+
+.status-declined {
+  color: #cf1322;
+  background: #fff1f0;
+}
+
+.status-completed{
+  color: #389e0d;
+  background: #f6ffed;
+}
+
+.status-on-hold {
+  color: #d48806;
+  background: #fffbe6;
+}
+
+.status-overdue {
+  color: #d4380d;
+  background: #fff2e8;
+}
+
+.status-in-progress {
+  color: #096dd9;
+  background: #e6f7ff;
+}

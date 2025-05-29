@@ -1,0 +1,63 @@
+@import "colours";
+
+.page-card {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 0 10px;
+  transition-duration: 0.8s;
+  height: calc(100vh - 180px);
+  overflow-y: scroll;
+}
+
+.authorise-document-a4-page {
+  padding: 10px 20px;
+  margin: auto;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  overflow-x: hidden;
+  height: calc(100vh - 250px);
+  max-width: 210mm;
+  max-height: 297mm;
+  overflow-y: scroll;
+}
+
+.authorise-document-a4-page-container {
+  max-height: calc(100vh - 320px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.authorise-document-a4-page-container-alt {
+  max-height: calc(100vh - 418px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.authorise-document-a4-page {
+  padding: 12mm 10mm !important;
+  margin: auto;
+  border-radius: 2px;
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  height: 297mm;
+  min-height: 297mm;
+  max-width: 21cm;
+  border: 1px solid transparent;
+  page-break-after: always;
+}
+
+.authorise-document-a4-page:active {
+  border: 1px solid $primary1;
+}
+
+.form-preview-notification {
+  font-family: "Space Mono", monospace;
+  padding: 10px;
+  background: #fafafa;
+  border: 1px dashed;
+  color: #2ab347;
+  border-radius: 2px;
+}

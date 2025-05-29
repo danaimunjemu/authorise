@@ -1,0 +1,42 @@
+<div class="d-flex flex-column h-100">
+<div>
+    <nav class="navbar navbar-expand-lg">
+        <nz-page-header
+          class="site-page-header"
+          (nzBack)="onBack()"
+          nzBackIcon
+          nzTitle="Go Back"
+          nzSubtitle="Navigate to your workspace"
+        >
+          <nz-breadcrumb nz-page-header-breadcrumb>
+            <nz-breadcrumb-item routerLink="../../workspace">
+              <span nz-icon nzType="home"></span>
+            </nz-breadcrumb-item>
+            <nz-breadcrumb-item>Self Service Administration</nz-breadcrumb-item>
+          </nz-breadcrumb>
+        </nz-page-header>
+        <div class="container-fluid remove-padding">
+          <div class="">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      
+            </ul>
+            <div class="d-flex">
+      
+              <div class="ml-5">
+                <afc-button [label]="'Open New Issue'" [disableButton]="false" [loading]="false" (buttonClick)="newIssue()" [style]="'gradient'" />
+              </div>
+      
+            </div>
+          </div>
+        </div>
+      </nav>
+</div>
+<div class="flex-grow-1">
+    <div class="authorise-section-card h-100">
+        <router-outlet />
+    </div>
+</div>
+
+</div>
+
+

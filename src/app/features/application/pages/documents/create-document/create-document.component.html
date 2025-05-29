@@ -1,0 +1,272 @@
+<div>
+  <nz-page-header
+    class="site-page-header"
+    (nzBack)="onBack()"
+    nzBackIcon
+    nzTitle="Go Back"
+    nzSubtitle="Navigate to view all documents"
+  >
+    <nz-breadcrumb nz-page-header-breadcrumb>
+      <nz-breadcrumb-item routerLink="../../workspace">
+        <span nz-icon nzType="home"></span>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        <a routerLink="../all">All Documents</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>Create Document</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </nz-page-header>
+</div>
+
+<div class="page-card d-flex flex-column">
+  <div>
+    <nz-steps [nzCurrent]="current">
+      <nz-step nzTitle="Category"></nz-step>
+      <nz-step nzTitle="Form"></nz-step>
+      <nz-step nzTitle="Confirm"></nz-step>
+    </nz-steps>
+  </div>
+
+  <div class="steps-content flex-grow-1">
+    <div *ngIf="current == 0" class="mt-3">
+      <div class="mt-3 d-flex justify-content-end">
+        <afc-button
+          [label]="'Create Generic Form'"
+          [disableButton]="false"
+          [loading]="false"
+          (buttonClick)="openGenericFormModal()"
+          [style]="'primary'"
+          [size]="'sm'"
+        />
+      </div>
+
+      <div class="mt-3">
+        <nz-cascader
+          [nzExpandTrigger]="'hover'"
+          [nzOptions]="categoriesList"
+          [(ngModel)]="selectedTemplate"
+          (ngModelChange)="onSelectTemplate($event)"
+        ></nz-cascader>
+      </div>
+      <div>
+        <nz-tabset>
+          <nz-tab [nzTitle]="formTemplate">
+            <ng-template #formTemplate>
+              <span nz-icon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.4em"
+                  height="1.4em"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    color="currentColor"
+                  >
+                    <path
+                      d="M15 2.5V4c0 1.414 0 2.121.44 2.56C15.878 7 16.585 7 18 7h1.5"
+                    />
+                    <path
+                      d="M4 16V8c0-2.828 0-4.243.879-5.121C5.757 2 7.172 2 10 2h4.172c.408 0 .613 0 .797.076c.183.076.328.22.617.51l3.828 3.828c.29.29.434.434.51.618c.076.183.076.388.076.796V16c0 2.828 0 4.243-.879 5.121C18.243 22 16.828 22 14 22h-4c-2.828 0-4.243 0-5.121-.879C4 20.243 4 18.828 4 16m4-5h8m-8 3h8m-8 3h4.17"
+                    />
+                  </g>
+                </svg>
+              </span>
+              Form
+            </ng-template>
+            <div *ngIf="getTemplateLoader">
+              <nz-skeleton [nzActive]="true"></nz-skeleton>
+            </div>
+            <div *ngIf="template && !getTemplateLoader">
+              <div class="authorise-document-a4-page-container-alt">
+                <div class="authorise-document-a4-page" id="authorise-document">
+                  <div>
+                    <div class="d-flex justify-content-center">
+                      <p class="form-preview-notification">
+                        This is just the form preview. Click "Next" if this is
+                        the correct form.
+                      </p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <h1>{{ template.title }}</h1>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <p>{{ template.description }}</p>
+                    </div>
+                    <div>
+                      <app-form-preview [fields]="template.form.blocks" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!template && !getTemplateLoader">
+              <nz-empty></nz-empty>
+            </div>
+          </nz-tab>
+          <nz-tab [nzTitle]="collaboratorsTemplate">
+            <ng-template #collaboratorsTemplate>
+              <span nz-icon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.4em"
+                  height="1.4em"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M20.774 18c.75 0 1.345-.471 1.88-1.13c1.096-1.35-.703-2.43-1.389-2.957c-.697-.537-1.476-.842-2.265-.913m-1-2a2.5 2.5 0 0 0 0-5M3.226 18c-.75 0-1.345-.471-1.88-1.13c-1.096-1.35.703-2.43 1.389-2.957C3.432 13.376 4.21 13.07 5 13m.5-2a2.5 2.5 0 0 1 0-5m2.584 9.111c-1.022.632-3.701 1.922-2.07 3.536C6.813 19.436 7.7 20 8.817 20h6.368c1.117 0 2.004-.564 2.801-1.353c1.632-1.614-1.047-2.904-2.069-3.536a7.46 7.46 0 0 0-7.832 0M15.5 7.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0"
+                    color="currentColor"
+                  />
+                </svg>
+              </span>
+              Collaborators
+            </ng-template>
+            <div *ngIf="getSlaLoader">
+              <nz-skeleton [nzActive]="true"></nz-skeleton>
+            </div>
+            <div *ngIf="agreement && !getSlaLoader">
+              <div>
+                <div *ngFor="let group of groupedActioners" class="mb-5">
+                  <h5>
+                    Level {{ group[0].index + 1 }} - {{ group[0].role }} (
+                    {{ group[0].time }} minutes )
+                  </h5>
+                  <div *ngFor="let actioner of group" class="mb-3">
+                    <nz-avatar
+                      nzIcon="user"
+                      style="background-color: #87d068"
+                    ></nz-avatar>
+                    {{ actioner.assignedUser }} <br />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!agreement && !getSlaLoader">
+              <nz-empty></nz-empty>
+            </div>
+          </nz-tab>
+        </nz-tabset>
+      </div>
+    </div>
+    <div *ngIf="current == 1" class="mt-3">
+      <div class="authorise-document-a4-page-container">
+        <div class="authorise-document-a4-page" id="authorise-document">
+          <div>
+            <div class="d-flex justify-content-center">
+              <h1>{{ template.title }}</h1>
+            </div>
+            <div class="d-flex justify-content-center">
+              <p>{{ template.description }}</p>
+            </div>
+          </div>
+          <app-dynamic-form
+            #childRef
+            [fields]="form"
+            (formDataEmitter)="receiveFormData($event)"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="current == 2"
+      class="mt-3"
+      class="authorise-document-a4-page-container"
+    >
+      <div class="authorise-document-a4-page">
+        <div>
+          <div class="d-flex justify-content-center">
+            <h1>{{ template.title }}</h1>
+          </div>
+          <div class="d-flex justify-content-center">
+            <p>{{ template.description }}</p>
+          </div>
+        </div>
+
+        <div *ngFor="let field of form" class="mt-3">
+          <div *ngIf="field.type != 'checkbox'">
+            <b>{{ field.id }}: </b> {{ field.value }}
+          </div>
+          <div *ngIf="field.type == 'checkbox'">
+            <b>{{ field.id }}: </b>
+            <label
+              *ngFor="let option of field.options"
+              nz-checkbox
+              [disabled]="true"
+              [(ngModel)]="option.checked"
+              [name]="field.id"
+              >{{ option.label }}</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps-action">
+    <div class="steps-action row" style="padding: 10px 0">
+      <div class="col d-flex justify-content-start">
+        <afc-button
+          [label]="'Previous'"
+          [disableButton]="!(current > 0)"
+          [loading]="false"
+          (buttonClick)="pre()"
+          [style]="'cancel'"
+          [size]="'sm'"
+        />
+      </div>
+      <div class="col d-flex justify-content-end">
+        <afc-button
+          *ngIf="current < 2"
+          [label]="'Next'"
+          [disableButton]="current === 0 && (!template || !agreement)"
+          [loading]="false"
+          (buttonClick)="next()"
+          [style]="'cancel'"
+          [size]="'sm'"
+        />
+
+        <afc-button
+          *ngIf="current === 2"
+          [label]="'Done'"
+          [disableButton]="false"
+          [loading]="createNewDocumentLoader"
+          (buttonClick)="done()"
+          [style]="'primary'"
+          [size]="'sm'"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<nz-modal
+  nzWidth="90vw"
+  [nzStyle]="{ top: '20px' }"
+  nzDraggable
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalTitle></ng-template>
+
+  <ng-template #modalContent>
+    <app-create-template
+      [subcategoryId]="genericFormSubcategoryId"
+      (onCreateTemplateSuccess)="onCreateTemplateSuccess($event)"
+    />
+  </ng-template>
+
+  <ng-template #modalFooter></ng-template>
+</nz-modal>

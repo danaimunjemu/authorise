@@ -1,0 +1,369 @@
+<div class="d-flex flex-column h-100">
+    <div>
+      <nav class="navbar navbar-expand-lg remove-padding" style="padding: 0;">
+        <div class="container-fluid remove-padding">
+            <nz-page-header
+            class="site-page-header"
+            (nzBack)="onBack()"
+            nzBackIcon
+            nzTitle="View Ticket"
+            [nzSubtitle]="(ticket ? ticket.ticketId : '...')"
+          >
+            <!-- <nz-breadcrumb nz-page-header-breadcrumb>
+              <nz-breadcrumb-item routerLink="../../workspace">
+                <span nz-icon nzType="home"></span>
+              </nz-breadcrumb-item>
+              <nz-breadcrumb-item>Self Service Administration</nz-breadcrumb-item>
+            </nz-breadcrumb> -->
+          </nz-page-header>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li> -->
+            </ul>
+            <div class="d-flex">
+                @if (record) {
+                    <button nz-tooltip [nzTooltipTitle]="ticket.docApprovalReference == '' || ticket.docApprovalReference == null ? 'Edit the form before submission' : 'You can no longer edit this form' " nz-button nzType="primary" (click)="toggleEdit()" [disabled]="!(ticket.docApprovalReference == '' || ticket.docApprovalReference == null)" [nzLoading]="submitForApprovalLoader" class="ms-3">
+                        <span nz-icon [nzType]="editToggler ? 'eye' : 'edit'"></span>
+                        {{( editToggler ? 'View Record' : 'Edit Record' )}}
+                      </button>
+                }
+                
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="flex-grow-1" style="padding-top: 1rem;">
+      @if (record) {
+        <div class="row h-100">
+            <div class="col-md-3">
+                <div class="ticket-container">
+                    <div class="ticket-top">
+                        <!-- <img src="/assets/images/brand/afc-banner.png" alt=""> -->
+                         <div class="row mt-3">
+                            <div class="col-md-6">
+                                <img src="/assets/images/brand/logo-full.png" alt="" class="w-100" style="max-width: 80px;">
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center justify-content-end" style="font-size: 24px; font-weight: 600;">
+                                Ticket
+                            </div>
+                         </div>
+    
+                         <div class="mt-3 ticket-id-banner">
+                            {{ticket.ticketId}}
+                         </div>
+    
+                         <div class="mt-3">
+                            <p class="ticket-heading">date created</p>
+                            <p class="ticket-details">{{ticket.createdAt}}</p>
+                         </div>
+    
+                         <div class="mt-3">
+                            <p class="ticket-heading">service</p>
+                            <p class="ticket-details">{{ticket.service}}</p>
+                         </div>
+    
+                         <div class="mt-3 mb-3">
+                            <p class="ticket-heading">status</p>
+                            <p class="ticket-details">{{ticket.status}} - {{ticket.message}}</p>
+                         </div>
+                        
+                    </div>
+                    <div class="ticket-bottom">
+                        <div class="d-flex justify-content-center">
+                            <img src="/assets/images/stock-images/barcode.png" alt="" class="barcode">
+                        </div>
+                        <div class="mt-3 mb-3 d-flex justify-content-center">
+                            <afc-button nz-tooltip [nzTooltipTitle]="ticket.docApprovalReference == '' || ticket.docApprovalReference == null ? 'To view the Flexi Doc, first submit the record for approval' : 'View Flexi Doc to track approval progress' " [size]="'sm'" [label]="'View Document'" [disableButton]="ticket.docApprovalReference == '' || ticket.docApprovalReference == null" [loading]="false" (buttonClick)="openAuthoriseDocument(ticket.docApprovalReference)" [style]="'gradient'" />
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+            <div class="col-md-9">
+                <div class="authorise-document-a4-page">
+                    <div class="d-flex justify-content-center">
+                        <h3>{{ ticket.service == 'account-opening' ? 'Account Opening Form' : 'Loan Application Form' }}</h3>
+                    </div>
+@if(!editToggler){
+    <div *ngIf="ticket.service == 'account-opening'">
+            <!-- Personal Information -->
+            <nz-list nzBordered nzHeader="Personal Information" class="mt-3" >
+                <nz-list-item>
+                    <span nz-typography>FULL NAME</span>
+                    {{ record.personalInfo.title }} {{ record.personalInfo.firstName }} {{(record.personalInfo.middleName != '' ? record.personalInfo.middleName : '' )}} {{ record.personalInfo.lastName }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>ID NUMBER</span>
+                    {{ record.personalInfo.pidNumber }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>GENDER</span>
+                    {{ record.personalInfo.gender }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>DOB</span>
+                    {{ record.personalInfo.dateOfBirth }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>PRIMARY NATIONALITY</span>
+                    {{ record.personalInfo.primaryNationality }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>MARITAL STATUS</span>
+                    {{ record.personalInfo.maritalStatus }}
+                  </nz-list-item>
+            </nz-list>
+             <!-- Contact Details -->
+             <nz-list nzBordered nzHeader="Contact Information" class="mt-3">
+                <nz-list-item>
+                    <span nz-typography>MOBILE NUMBER</span>
+                    {{ record.contactInfo.mobileNumber }} 
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>EMAIL ADDRESS</span>
+                    {{ record.contactInfo.emailAddress }} 
+                  </nz-list-item>
+                <nz-list-item>
+                    <span nz-typography>ADDRESS</span>
+                    {{ record.contactInfo.addressLine1 }} {{ record.contactInfo.streetAddress }} {{ record.contactInfo.city }} {{ record.contactInfo.country }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>ADDRESS TYPE</span>
+                    {{ record.contactInfo.addressType }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>STAYING SINCE</span>
+                    {{ record.contactInfo.stayingSince }}
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>BRANCH</span>
+                    {{ record.contactInfo.branch }}
+                  </nz-list-item>
+            </nz-list>
+              <!-- Employment Details -->
+              <nz-list nzBordered nzHeader="Employment Information" class="mt-3">
+                <nz-list-item>
+                    <span nz-typography>LINE OF ACTIVITY</span>
+                    {{ record.employmentInfo.lineOfActivity }} 
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>OCCUPATION</span>
+                    {{ record.employmentInfo.occupation }} 
+                  </nz-list-item>
+                <nz-list-item>
+                    <span nz-typography>ANNUAL INCOME SLAB</span>
+                    {{ record.employmentInfo.annualIncomeSlab }}
+                  </nz-list-item>
+            </nz-list>
+               <!-- Documents -->
+               <nz-list nzBordered nzHeader="Documents" class="mt-3">
+                <nz-list-item>
+                    <span nz-typography>ID</span>
+                    <div class="d-flex">
+                        <button nz-button nzType="default" (click)="openFile(record.documentInfo.id)">
+                            <span nz-icon nzType="export"></span>
+                            Open File
+                          </button>
+                          <button nz-button nzType="primary" (click)="downloadFile(record.documentInfo.id)" class="ms-3">
+                            <span nz-icon nzType="download"></span>
+                            Download File
+                          </button>
+                    </div>
+                    
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>PROFILE PICTURE</span>
+                    <div class="d-flex">
+                        <button nz-button nzType="default" (click)="openFile(record.documentInfo.profile)">
+                            <span nz-icon nzType="export"></span>
+                            Open File
+                          </button>
+                          <button nz-button nzType="primary" (click)="downloadFile(record.documentInfo.profile)" class="ms-3">
+                            <span nz-icon nzType="download"></span>
+                            Download File
+                          </button>
+                    </div>
+                  </nz-list-item>
+                <nz-list-item>
+                    <span nz-typography>SIGNATURE</span>
+                    <div class="d-flex">
+                        <button nz-button nzType="default" (click)="openFile(record.documentInfo.signature)">
+                            <span nz-icon nzType="export"></span>
+                            Open File
+                          </button>
+                          <button nz-button nzType="primary" (click)="downloadFile(record.documentInfo.signature)" class="ms-3">
+                            <span nz-icon nzType="download"></span>
+                            Download File
+                          </button>
+                    </div>
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>PROOF OF RES</span>
+                    <div class="d-flex">
+                        <button nz-button nzType="default" (click)="openFile(record.documentInfo.proofOfRes)">
+                            <span nz-icon nzType="export"></span>
+                            Open File
+                          </button>
+                          <button nz-button nzType="primary" (click)="downloadFile(record.documentInfo.proofOfRes)" class="ms-3">
+                            <span nz-icon nzType="download"></span>
+                            Download File
+                          </button>
+                    </div>
+                  </nz-list-item>
+                  <nz-list-item>
+                    <span nz-typography>OTHER DOCUMENTS</span>
+                    <div class="d-flex">
+                        <button nz-button nzType="default" (click)="openFile(record.documentInfo.otherDocuments)">
+                            <span nz-icon nzType="export"></span>
+                            Open File
+                          </button>
+                          <button nz-button nzType="primary" (click)="downloadFile(record.documentInfo.otherDocuments)" class="ms-3">
+                            <span nz-icon nzType="download"></span>
+                            Download File
+                          </button>
+                    </div>
+                  </nz-list-item>
+            </nz-list>
+            <div class="mt-3 d-flex justify-content-center">
+                <button nz-button nzType="primary" (click)="submitForApproval()" [disabled]="!(ticket.docApprovalReference == '' || ticket.docApprovalReference == null)" [nzLoading]="submitForApprovalLoader" class="ms-3" *ngIf="(ticket.docApprovalReference == '' || ticket.docApprovalReference == null)">
+                    <span nz-icon nzType="check"></span>
+                    Submit for Approval
+                  </button>
+            </div>
+
+    </div>
+
+    <div *ngIf="ticket.service == 'loans'">
+      <nz-page-header nzTitle="Enquiry Results"></nz-page-header>
+                            <nz-list nzBordered>
+                              <nz-list-item>
+                                <span nz-typography>Name</span>{{record.enquiryResult.additionalData.CUSTOMER_NAME}} 
+                              </nz-list-item>
+                              <nz-list-item>
+                                <span nz-typography>Account</span>{{record.additionalData.currency}} {{record.additionalData.accountNumber}}
+                              </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Max Qualifying Amount</span>{{record.additionalData.currency}} {{record.enquiryResult.maxQualifyingAmount_L | number:'1.2-2'}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>FCB</span>       <nz-tag nzColor="green" [nzBordered]="false">{{record.enquiryResult.fcbStatus}}</nz-tag>
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>FCB Score</span>       {{record.enquiryResult.fcbScore}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Applied Amount</span>      {{record.additionalData.amount}} 
+                                  </nz-list-item>
+                              </nz-list>
+
+                              <!-- <nz-page-header nzTitle="Loans"></nz-page-header>
+                              <div *ngIf="record.enquiryResult.additionalData.LMS_LOANS.isArray">
+                                <nz-list nzBordered *ngFor="let loan of record.enquiryResult.additionalData.LMS_LOANS" class="mb-3">
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Account Number</span>{{loan.loanAccountNumber}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Account Currency</span>{{loan.loanAccountCurrency}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Amount</span>      {{loan.loanAmount}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Maturity Date</span>       {{loan.loanMaturityDate}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Total Due Outstanding</span>       {{loan.totalDueOutstanding}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Total Loan Outstanding</span>       {{loan.totalLoanOutstanding}}
+                                  </nz-list-item>
+                                  
+                              </nz-list>
+                              </div>  
+                              <div *ngIf="!record.enquiryResult.additionalData.LMS_LOANS.isArray">
+                                <nz-list nzBordered class="mb-3">
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Account Number</span>{{record.enquiryResult.additionalData.LMS_LOANS.loanAccountNumber}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Account Currency</span>{{record.enquiryResult.additionalData.LMS_LOANS.loanAccountCurrency}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Amount</span>      {{record.enquiryResult.additionalData.LMS_LOANS.loanAmount}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Maturity Date</span>       {{record.enquiryResult.additionalData.LMS_LOANS.loanMaturityDate}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Total Due Outstanding</span>       {{record.enquiryResult.additionalData.LMS_LOANS.totalDueOutstanding}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Total Loan Outstanding</span>       {{record.enquiryResult.additionalData.LMS_LOANS.totalLoanOutstanding}}
+                                  </nz-list-item>
+                                  
+                              </nz-list>
+                              </div> -->
+
+
+
+
+
+
+
+                              <!-- old -->
+                              <!-- <nz-list nzBordered *ngFor="let loan of record.enquiryResult.additionalData.LMS_LOANS" class="mb-3">
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Account Number</span>{{loan.loanAccountNumber}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Account Currency</span>{{loan.loanAccountCurrency}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Amount</span>      {{loan.loanAmount}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Loan Maturity Date</span>       {{loan.loanMaturityDate}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Total Due Outstanding</span>       {{loan.totalDueOutstanding}}
+                                  </nz-list-item>
+                                  <nz-list-item>
+                                    <span nz-typography>Total Loan Outstanding</span>       {{loan.totalLoanOutstanding}}
+                                  </nz-list-item>
+                                  
+                              </nz-list> -->
+      <!-- LOANS -->
+      <div class="mt-3 d-flex justify-content-center">
+        <button nz-button nzType="primary" [disabled]="!(ticket.docApprovalReference == '' || ticket.docApprovalReference == null)" (click)="submitForApproval()" [nzLoading]="submitForApprovalLoader" class="ms-3">
+            <span nz-icon nzType="check"></span>
+            Submit for Approval
+          </button>
+    </div>
+    </div>
+}
+
+@if(editToggler){
+    <div>
+
+    </div>
+}
+                    
+                    
+                </div>
+            </div>
+        </div>
+    }
+    
+    @if (!record) {
+        <nz-skeleton [nzActive]="true"></nz-skeleton>
+    }
+    </div>
+  </div>
+
+

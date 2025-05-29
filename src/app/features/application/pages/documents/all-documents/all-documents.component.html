@@ -1,0 +1,119 @@
+<div class="d-flex flex-column h-100">
+  <div>
+    <nav class="navbar navbar-expand-lg">
+      <nz-page-header
+        class="site-page-header"
+        (nzBack)="onBack()"
+        nzBackIcon
+        nzTitle="Go Back"
+        nzSubtitle="Navigate to your workspace"
+      >
+        <nz-breadcrumb nz-page-header-breadcrumb>
+          <nz-breadcrumb-item routerLink="../../workspace">
+            <span nz-icon nzType="home"></span>
+          </nz-breadcrumb-item>
+          <nz-breadcrumb-item>All Documents</nz-breadcrumb-item>
+        </nz-breadcrumb>
+      </nz-page-header>
+      <div class="container-fluid">
+        <div class="">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    
+          </ul>
+          <div class="d-flex">
+    
+            <div class="ml-5">
+              <afc-button [label]="'Open New Document'" [disableButton]="false" [loading]="false" (buttonClick)="createDocument()" [style]="'gradient'" />
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="flex-grow-1">
+    <div class="authorise-section-card">
+      <nz-tabset [nzSelectedIndex]="getSelectedIndex()">
+        <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name" (nzSelect)="filterByRequest(tab.value)">
+          <div class="mt-3">
+    
+            <div class="mt-3" style="height: 100%">
+              <div class="row authorise-workspace-table-header">
+                <div class="col-md-3">Name</div>
+                <div class="col-md-2">Created</div>
+                <div class="col-md-2">Status</div>
+                <div class="col-md-3">Created By</div>
+                <div class="col-md-2">Collaborators</div>
+              </div>
+    
+    <!--          <nz-spin nzTip="Loading..." [nzSpinning]="fetchDocumentsLoader">-->
+    <!--            <div *ngIf="!fetchDocumentsLoader">-->
+      @if (documents) {
+        @if(documents.length == 0) {
+          <div class="mt-5">
+            <nz-empty></nz-empty>
+          </div>
+        }
+      @if (documents.length !=0) {
+        <div style="max-height: calc(100vh - 328px); overflow-y: scroll;">
+          <div class="row authorise-workspace-table-data" *ngFor="let document of documents" (click)="viewDocument(document.id)">
+            <div class="col-md-3">
+              <div class="d-flex">
+                <div class="document-name-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor"><path d="M15 2.5V4c0 1.414 0 2.121.44 2.56C15.878 7 16.585 7 18 7h1.5"/><path d="M4 16V8c0-2.828 0-4.243.879-5.121C5.757 2 7.172 2 10 2h4.172c.408 0 .613 0 .797.076c.183.076.328.22.617.51l3.828 3.828c.29.29.434.434.51.618c.076.183.076.388.076.796V16c0 2.828 0 4.243-.879 5.121C18.243 22 16.828 22 14 22h-4c-2.828 0-4.243 0-5.121-.879C4 20.243 4 18.828 4 16m4-5h8m-8 3h8m-8 3h4.17"/></g></svg>
+                </div>
+                <div class="document-name-text">
+                  <span [nzTooltipTitle]="document.template.description"  nzTooltipPlacement="bottom" nz-tooltip>
+                    {{document.template.title}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <p class="authorise-workspace-table-p">{{ document.createdAt | date: 'dd MMMM yyyy' }}</p>
+              <p class="authorise-workspace-table-p">{{ document.createdAt | date: 'HH:mm:ss' }}</p>
+            </div>
+            <div class="col-md-2">
+              <authorise-doc-status [status]="document.status" />
+            </div>
+            <div class="col-md-3">
+              {{ document.owner }}
+            </div>
+            <div class="col-md-2">
+              <nz-avatar-group>
+                <nz-avatar
+                  *ngFor="let actioner of document.actioners; let i = index;"
+                  style="background-color: #f56a00"
+                  [nzText]="actioner.actioner.substring(0, 2).toUpperCase()"
+                  [nzTooltipTitle]="actioner.actioner"
+                  nzTooltipPlacement="bottom"
+                  nz-tooltip></nz-avatar>
+              </nz-avatar-group>
+            </div>
+          </div>
+        </div>
+        
+      }
+      }
+      
+                  
+    <!--            </div>-->
+    <!--          </nz-spin>-->
+    
+    
+            </div>
+    
+    
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

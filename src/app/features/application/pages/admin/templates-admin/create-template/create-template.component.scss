@@ -1,0 +1,365 @@
+@import "colours";
+
+.authorise-template-title-input {
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid #efefef;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.authorise-template-title-input:hover {
+  border: 1px solid $primary6;
+}
+
+.authorise-template-description-input {
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #efefef;
+  border-radius: 8px;
+}
+
+.authorise-template-description-input:hover {
+  border: 1px solid $primary6;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.content-tabs {
+  max-width: fit-content;
+  padding: 0;
+  margin-left: 10px;
+  border-right: 1px solid #dee2e6;
+}
+
+.authorise-document-a4-page {
+  padding: 10px;
+  margin: auto;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 220px);
+}
+
+.authorise-document-content {
+  //overflow: scroll;
+  //max-height: 297mm;
+}
+
+.authorise-draggable-item {
+  background: rgb(255, 255, 255);
+  padding: 10px 5px;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+  transition-duration: 0.5s;
+}
+
+.authorise-draggable-item:hover {
+  cursor: pointer;
+  border: 1px solid $primary4;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.authorise-draggable-item:hover .authorise-draggable-heading {
+  font-weight: 900;
+  color: $primary6;
+}
+
+.authorise-dropzone {
+  padding: 10px;
+  border-radius: 8px;
+  background: #fafafa;
+  border: 1px dashed #d9d9d9;
+}
+
+.authorise-form-element {
+  padding: 10px;
+}
+
+.authorise-document-edit-tools-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  padding: 10px;
+  border-radius: 8px;
+  max-height: calc(100vh - 250px);
+  margin-top: 42px;
+}
+
+.authorise-edit-tab-li {
+  padding: 10px;
+  border-right: 5px solid transparent;
+  transition-duration: 0.5s;
+  color: rgb(57, 56, 66);
+}
+
+.authorise-edit-tab-li:hover {
+  color: $primary6;
+  cursor: pointer;
+}
+
+.authorise-edit-tab-li-active {
+  border-right: 5px solid $primary6;
+  color: $primary6;
+}
+
+.my-dropzone {
+  padding: 20px;
+}
+
+.dropzone-icon {
+  color: $primary6;
+}
+
+.dropzone-delete-icon {
+  color: #ff4d4f;
+  font-size: 8px;
+  margin-left: 20px;
+}
+
+.dropzone-delete-icon:hover {
+  cursor: pointer;
+}
+
+.dropzone-edit-icon {
+  color: #949494;
+  margin-left: 20px;
+}
+
+.dropzone-edit-icon:hover {
+  cursor: pointer;
+}
+
+.dropzone-header {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.dropzone-content {
+  font-weight: 200;
+  font-size: 16px;
+  margin-top: 6px;
+}
+
+.ant-picker {
+  width: 100%;
+}
+
+.ant-input-number {
+  width: 100%;
+}
+
+.authorise-form-element-name-input {
+  border: none;
+}
+
+.authorise-document-edit-icon {
+  padding: 8px;
+  font-size: 6px;
+  background: rgb(242, 242, 242);
+  border-radius: 4px;
+  display: inline-table;
+}
+
+.authorise-draggable-icon {
+  padding: 8px;
+  font-size: 6px;
+  background: rgb(242, 242, 242);
+  border-radius: 4px;
+  display: inline-table;
+  margin: 0 10px;
+  color: #868f99;
+}
+
+.authorise-document-edit-text {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.authorise-mark-as-required-text {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.authorise-dropzone-form-element-area {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  border: 1px solid #efefef;
+  transition-duration: 0.5s;
+  background: #fff;
+}
+
+.authorise-dropzone-form-element-area:hover {
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.dropzone-drag-icon {
+  font-size: 12px;
+  color: #d8d8d8;
+}
+
+.draggable-drag-icon {
+  font-size: 8px;
+  color: #d8d8d8;
+}
+
+::ng-deep .ant-input-group-addon {
+  border: 1px solid #d9d9d9;
+  border-right: none;
+  padding: 0 0 0 10px;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.authorise-meta-data-form-input {
+  border: 1px solid #d9d9d9;
+  border-left: none;
+  margin: 0;
+  font-size: 12px;
+}
+
+.authorise-draggable-heading {
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+  transition-duration: 0.5s;
+}
+
+.authorise-draggable-content {
+  margin: 0;
+  font-size: 12px;
+}
+
+:host {
+  display: block;
+}
+
+pre {
+  text-align: center;
+  padding: 8px;
+}
+
+.dndList {
+  transition: all 300ms ease;
+  padding: 5px;
+
+  &:not(.horizontal).dndDragover {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  &.horizontal {
+    &.dndDragover {
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-bottom: 12px;
+    }
+
+    .mat-mdc-list-item {
+      max-width: 120px;
+      margin: 2px;
+    }
+  }
+}
+
+.dndDragging {
+  border: 1px solid $primary3;
+  border-radius: 4px;
+}
+
+.dndDraggingSource {
+  display: none;
+}
+
+.dndPlaceholder {
+  min-height: 72px;
+}
+
+.authorise-form-content-container {
+  height: calc(100vh - 464px);
+  overflow: scroll;
+}
+
+.authorise-form-content {
+  padding: 10px;
+  border-radius: 8px;
+  background: #fafafa;
+  border: 1px dashed #d9d9d9;
+  margin-top: 20px;
+}
+
+.steps-content {
+  margin-top: 10px;
+}
+
+.my-modal {
+  width: 210mm !important;
+}
+
+.ant-collapse {
+  margin-top: 15px;
+}
+
+.dropzone-added-space {
+  padding-bottom: 150px;
+}
+
+.authorise-form-builder-tools-content {
+  max-height: calc(100vh - 270px);
+  overflow-y: scroll;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  font-size: 12px;
+}
+
+.authorise-form-builder-tools-heading {
+  font-size: 16px;
+  margin: 10px 0px 15px 0px;
+  font-weight: 600;
+}
+
+.authorise-form-builder-tools-details {
+  font-size: 14px;
+  color: #818a8e;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.authorise-helper-text {
+  font-size: 20px;
+  transition-duration: 0.5s;
+}
+
+.authorise-helper-text:hover {
+  color: $primary6;
+  cursor: pointer;
+}
+
+nz-input-group {
+  margin-bottom: 8px;
+}
+
+::ng-deep .highlight {
+  color: #f50;
+}
+
+.selected-node {
+  background-color: $primary6;
+  color: white;
+}
+
+.ant-select {
+  width: 100%;
+}

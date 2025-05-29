@@ -1,0 +1,159 @@
+<form>
+  <fieldset>
+    <div *ngFor="let field of fields; let i = index">
+      <div [ngSwitch]="field.type">
+        <ng-template ngSwitchCase="short-text">
+          <nz-form-item>
+            <input
+              nz-input
+              [name]="field.id"
+              [placeholder]="field.label"
+              [(ngModel)]="field.value"
+            />
+          </nz-form-item>
+        </ng-template>
+
+        <ng-template ngSwitchCase="long-text">
+          <nz-form-item>
+            <textarea
+              rows="4"
+              nz-input
+              [(ngModel)]="field.value"
+              [name]="field.id"
+              [placeholder]="field.label"
+            ></textarea>
+          </nz-form-item>
+        </ng-template>
+
+        <!--          <ng-template ngSwitchCase="rich-text">-->
+        <!--            <form [formGroup]="form">-->
+        <!--              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">-->
+        <!--              </ngx-editor-menu>-->
+        <!--              <ngx-editor [editor]="editor" formControlName="editorContent" required>-->
+        <!--              </ngx-editor>-->
+        <!--            </form>-->
+        <!--          </ng-template>-->
+
+        <ng-template ngSwitchCase="number">
+          <nz-form-item>
+            <input
+              nz-input
+              [placeholder]="field.label"
+              [(ngModel)]="field.value"
+              [name]="field.id"
+              type="number"
+            />
+          </nz-form-item>
+        </ng-template>
+
+        <ng-template ngSwitchCase="date">
+          <nz-form-item>
+            <nz-date-picker
+              [(ngModel)]="field.value"
+              [name]="field.id"
+            ></nz-date-picker>
+          </nz-form-item>
+        </ng-template>
+
+        <ng-template ngSwitchCase="time">
+          <nz-form-item>
+            <nz-time-picker
+              [(ngModel)]="field.value"
+              [name]="field.id"
+            ></nz-time-picker>
+          </nz-form-item>
+        </ng-template>
+
+        <ng-template ngSwitchCase="date-time">
+          <nz-form-item>
+            <nz-date-picker
+              [nzShowTime]="true"
+              [(ngModel)]="field.value"
+              [name]="field.id"
+            ></nz-date-picker>
+          </nz-form-item>
+        </ng-template>
+
+        <ng-template ngSwitchCase="checkbox">
+          <nz-form-item>
+            <label
+              *ngFor="let option of field.options"
+              nz-checkbox
+              [(ngModel)]="option.checked"
+              [name]="field.id"
+              >{{ option.label }}</label
+            >
+          </nz-form-item>
+        </ng-template>
+
+        <ng-template ngSwitchCase="radio">
+          <nz-form-item>
+            <nz-radio-group [(ngModel)]="field.value">
+              <label
+                *ngFor="let option of field.options"
+                nz-radio
+                [(ngModel)]="field.value"
+                [name]="field.id"
+                >{{ option }}</label
+              >
+            </nz-radio-group>
+          </nz-form-item>
+        </ng-template>
+
+        <ng-template ngSwitchCase="email">
+          <nz-form-item>
+            <input
+              nz-input
+              [placeholder]="field.label"
+              [(ngModel)]="field.value"
+              [name]="field.id"
+              email
+            />
+          </nz-form-item>
+        </ng-template>
+
+        <!--          <ng-template ngSwitchCase="select">-->
+        <!--            <nz-form-item>-->
+        <!--              <nz-select [formControlName]="field!.name" [nzPlaceHolder]="field!.label">-->
+        <!--                <nz-option *ngFor="let option of field!.options" [nzValue]="option" [nzLabel]="option"></nz-option>-->
+        <!--              </nz-select>-->
+        <!--            </nz-form-item>-->
+        <!--          </ng-template>-->
+
+        <ng-template ngSwitchCase="upload">
+          <nz-form-item>
+            <nz-upload
+              nzType="drag"
+              [nzMultiple]="true"
+              nzAction=""
+              [nzCustomRequest]="customRequestHandler"
+              (nzChange)="onUploadChange($event, i)"
+            >
+              <p class="ant-upload-drag-icon">
+                <span nz-icon nzType="inbox"></span>
+              </p>
+              <p class="ant-upload-text">
+                Click or drag file to this area to upload
+              </p>
+              <p class="ant-upload-hint">
+                Support for a single or bulk upload. Strictly prohibit from
+                uploading company data or other band files
+              </p>
+            </nz-upload>
+          </nz-form-item>
+        </ng-template>
+
+        <!--          <ng-template ngSwitchCase="multi-select">-->
+        <!--            <nz-form-item>-->
+        <!--              <nz-select [nzMaxTagCount]="3" [formControlName]="field!.name" [nzPlaceHolder]="field!.label" nzMode="multiple" [nzMaxTagPlaceholder]="tagPlaceHolder">-->
+        <!--                <nz-option *ngFor="let option of field!.options" [nzValue]="option" [nzLabel]="option"></nz-option>-->
+        <!--              </nz-select>-->
+        <!--              <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>-->
+        <!--            </nz-form-item>-->
+        <!--          </ng-template>-->
+
+        <ng-template ngSwitchDefault> </ng-template>
+      </div>
+    </div>
+  </fieldset>
+</form>

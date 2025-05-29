@@ -1,0 +1,55 @@
+.ticket-top {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.ticket-bottom {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border-top: 1px dashed #ccc;
+}
+
+.barcode {
+    height: 50px;
+    width: 150px;
+}
+
+.ticket-heading {
+    font-size: 12px;
+    color: #ACADAF;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.ticket-details {
+    font-size: 12px;
+    color: black;
+    margin-bottom: 2px;
+    font-family: "Space Mono", monospace;
+}
+
+.ticket-id-banner {
+    background-color: grey;
+    background-color: #EAEDF0;
+    display: flex;
+    justify-content: center;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: "Space Mono", monospace;
+}
+
+.authorise-document-a4-page {
+    padding: 12mm 10mm !important;
+    margin: auto;
+    border-radius: 2px;
+    background-color: hsl(0, 0%, 100%);
+    box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+    height: 100%;
+    overflow: scroll;
+    max-width: 21cm;
+    border: 1px solid transparent;
+    page-break-after: always;
+    max-height: calc(100vh - 255px);
+}

@@ -1,0 +1,503 @@
+<div class="d-flex flex-column h-100">
+  <div>
+    <nav class="navbar navbar-expand-lg">
+      <nz-page-header
+        class="site-page-header"
+        [nzTitle]="'Hi ' + user.name"
+        [nzSubtitle]="'You currently have ' + (dashboardStats?.pending ?? '...') + ' documents waiting on you'"
+      >
+        <nz-breadcrumb nz-page-header-breadcrumb>
+          <nz-breadcrumb-item routerLink="../workspace">
+            <span nz-icon nzType="home"></span>
+          </nz-breadcrumb-item>
+          <nz-breadcrumb-item>Workspace</nz-breadcrumb-item>
+        </nz-breadcrumb>
+      </nz-page-header>
+      <div class="container-fluid remove-padding ">
+        <div class="">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <afc-button
+              [label]="'Create New Document'"
+              [disableButton]="false"
+              [loading]="false"
+              (buttonClick)="createNewDocument()"
+              [style]="'gradient'"
+            />
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div>
+    <div class="row mt-3">
+      <div class="col authorise-stats-card" (click)="openFilteredDocs('OWN')">
+        <div class="row">
+          <div class="col-7">
+            <p class="authorise-stats-card-header">My docs</p>
+            <p class="authorise-stats-card-number">
+              <span *ngIf="dashboardStatsLoader">
+                <p class="placeholder-glow">
+                  <span class="placeholder col-12"></span>
+                </p>
+              </span>
+              <span *ngIf="!dashboardStatsLoader">{{
+                dashboardStats.documents
+              }}</span>
+            </p>
+            <p class="authorise-stats-card-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M11.1 3.002c-3.648.007-5.56.096-6.78 1.317C3.002 5.637 3.002 7.758 3.002 12s0 6.363 1.318 7.681s3.438 1.318 7.68 1.318s6.363 0 7.681-1.318c1.221-1.22 1.31-3.132 1.317-6.78m-.518-9.384l-5.548 5.534m5.549-5.534c-.494-.494-3.822-.448-4.525-.438m4.525.438c.494.495.448 3.826.438 4.53"
+                  color="currentColor"
+                />
+              </svg>
+              View
+            </p>
+          </div>
+          <div class="col-5 d-flex justify-content-center align-items-center">
+            <div class="authorise-stats-card-icon card-icon-my-docs">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="3em"
+                height="3em"
+                viewBox="0 0 24 24"
+              >
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path
+                    d="M3 10c0-3.771 0-5.657 1.172-6.828C5.343 2 7.229 2 11 2h2c3.771 0 5.657 0 6.828 1.172C21 4.343 21 6.229 21 10v4c0 3.771 0 5.657-1.172 6.828C18.657 22 16.771 22 13 22h-2c-3.771 0-5.657 0-6.828-1.172C3 19.657 3 17.771 3 14z"
+                  />
+                  <path stroke-linecap="round" d="M8 12h8M8 8h8m-8 8h5" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col authorise-stats-card" (click)="openFilteredDocs('SHARE')">
+        <div class="row">
+          <div class="col-7">
+            <p class="authorise-stats-card-header">My shares</p>
+            <p class="authorise-stats-card-number">
+              <span *ngIf="dashboardStatsLoader">
+                <p class="placeholder-glow">
+                  <span class="placeholder col-12"></span>
+                </p>
+              </span>
+              <span *ngIf="!dashboardStatsLoader">{{
+                dashboardStats.shares
+              }}</span>
+            </p>
+            <p class="authorise-stats-card-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M11.1 3.002c-3.648.007-5.56.096-6.78 1.317C3.002 5.637 3.002 7.758 3.002 12s0 6.363 1.318 7.681s3.438 1.318 7.68 1.318s6.363 0 7.681-1.318c1.221-1.22 1.31-3.132 1.317-6.78m-.518-9.384l-5.548 5.534m5.549-5.534c-.494-.494-3.822-.448-4.525-.438m4.525.438c.494.495.448 3.826.438 4.53"
+                  color="currentColor"
+                />
+              </svg>
+              View
+            </p>
+          </div>
+          <div class="col-5 d-flex justify-content-center align-items-center">
+            <div class="authorise-stats-card-icon card-icon-my-shares">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="3em"
+                height="3em"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                >
+                  <path
+                    stroke-linejoin="round"
+                    d="M22 7h-8c-1.818 0-2.913.892-3.32 1.3c-.125.127-.188.19-.19.19c0 .002-.063.065-.19.19C9.892 9.087 9 10.182 9 12v3m13-8l-5-5m5 5l-5 5"
+                  />
+                  <path
+                    d="M3.465 20.535C4.93 22 7.287 22 12.003 22c4.715 0 7.073 0 8.537-1.465c1.242-1.241 1.431-3.123 1.46-6.537M3.465 20.535C2 19.07 2 16.713 2 11.997m1.465 8.538C4.929 22 7.286 22 12 22s7.071 0 8.535-1.465c1.241-1.24 1.43-3.122 1.46-6.536m-18.53 6.536C2 19.071 2 16.714 2 12m1.465-8.54C4.706 2.218 6.588 2.029 10.002 2M2.055 8c.11-2.193.436-3.562 1.41-4.536c1.24-1.24 3.122-1.43 6.535-1.459"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div
+        class="col authorise-stats-card"
+        (click)="openFilteredDocs('SHARED_WITH_ME')"
+      >
+        <div class="row">
+          <div class="col-7">
+            <p class="authorise-stats-card-header">Shared with me</p>
+            <p class="authorise-stats-card-number">
+              <span *ngIf="dashboardStatsLoader">
+                <p class="placeholder-glow">
+                  <span class="placeholder col-12"></span>
+                </p>
+              </span>
+              <span *ngIf="!dashboardStatsLoader">{{
+                dashboardStats.sharedWithMe
+              }}</span>
+            </p>
+            <p class="authorise-stats-card-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M11.1 3.002c-3.648.007-5.56.096-6.78 1.317C3.002 5.637 3.002 7.758 3.002 12s0 6.363 1.318 7.681s3.438 1.318 7.68 1.318s6.363 0 7.681-1.318c1.221-1.22 1.31-3.132 1.317-6.78m-.518-9.384l-5.548 5.534m5.549-5.534c-.494-.494-3.822-.448-4.525-.438m4.525.438c.494.495.448 3.826.438 4.53"
+                  color="currentColor"
+                />
+              </svg>
+              View
+            </p>
+          </div>
+          <div class="col-5 d-flex justify-content-center align-items-center">
+            <div class="authorise-stats-card-icon card-icon-shared-with-me">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="3em"
+                height="3em"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M22 14c0 3.771 0 5.657-1.172 6.828C19.657 22 17.771 22 14 22h-4c-3.771 0-5.657 0-6.828-1.172c-.654-.653-.943-1.528-1.07-2.828M2 12V6.95c0-.883 0-1.324.07-1.692A4 4 0 0 1 5.257 2.07C5.626 2 6.068 2 6.95 2c.386 0 .58 0 .766.017a4 4 0 0 1 2.18.904c.144.119.28.255.554.529L11 4c.816.816 1.224 1.224 1.712 1.495a4 4 0 0 0 .848.352C14.098 6 14.675 6 15.828 6h.374c2.632 0 3.949 0 4.804.77c.079.07.154.145.224.224c.57.633.718 1.52.757 3.006"
+                  />
+                  <path
+                    stroke-linejoin="round"
+                    d="M2 15h11m0 0l-4.125-3M13 15l-4.125 3"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div
+        class="col authorise-stats-card"
+        (click)="openFilteredDocs('WAITING_APPROVAL')"
+      >
+        <div class="row">
+          <div class="col-7">
+            <p class="authorise-stats-card-header">Waiting approval</p>
+            <p class="authorise-stats-card-number">
+              <span *ngIf="dashboardStatsLoader">
+                <p class="placeholder-glow">
+                  <span class="placeholder col-12"></span>
+                </p>
+              </span>
+              <span *ngIf="!dashboardStatsLoader">{{
+                dashboardStats.pending
+              }}</span>
+            </p>
+            <p class="authorise-stats-card-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M11.1 3.002c-3.648.007-5.56.096-6.78 1.317C3.002 5.637 3.002 7.758 3.002 12s0 6.363 1.318 7.681s3.438 1.318 7.68 1.318s6.363 0 7.681-1.318c1.221-1.22 1.31-3.132 1.317-6.78m-.518-9.384l-5.548 5.534m5.549-5.534c-.494-.494-3.822-.448-4.525-.438m4.525.438c.494.495.448 3.826.438 4.53"
+                  color="currentColor"
+                />
+              </svg>
+              View
+            </p>
+          </div>
+          <div class="col-5 d-flex justify-content-center align-items-center">
+            <div class="authorise-stats-card-icon card-icon-waiting-approval">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="3em"
+                height="3em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M10.944 1.25h2.112c1.838 0 3.294 0 4.433.153c1.172.158 2.121.49 2.87 1.238a.75.75 0 0 1-1.06 1.06c-.424-.422-1.004-.676-2.01-.811c-1.027-.138-2.382-.14-4.289-.14h-2c-1.907 0-3.261.002-4.29.14c-1.005.135-1.585.389-2.008.812c-.423.423-.677 1.003-.812 2.009c-.138 1.028-.14 2.382-.14 4.289v4c0 1.907.002 3.262.14 4.29c.135 1.005.389 1.585.812 2.008c.423.423 1.003.677 2.009.812c1.028.138 2.382.14 4.289.14h2c1.907 0 3.262-.002 4.29-.14c1.005-.135 1.585-.389 2.008-.812c.696-.696.907-1.777.943-4.309a.75.75 0 0 1 1.5.022c-.035 2.427-.192 4.158-1.382 5.348c-.749.748-1.698 1.08-2.87 1.238c-1.14.153-2.595.153-4.433.153h-2.112c-1.838 0-3.294 0-4.433-.153c-1.172-.158-2.121-.49-2.87-1.238c-.748-.749-1.08-1.698-1.238-2.87c-.153-1.14-.153-2.595-.153-4.433V9.944c0-1.838 0-3.294.153-4.433c.158-1.172.49-2.121 1.238-2.87c.749-.748 1.698-1.08 2.87-1.238c1.14-.153 2.595-.153 4.433-.153m7.17 5.796a2.716 2.716 0 1 1 3.84 3.84L17.2 15.643a7.025 7.025 0 0 1-.63.587c-.23.18-.48.334-.744.46c-.224.107-.46.185-.806.3l-2.084.695a1.28 1.28 0 0 1-1.62-1.62l.681-2.04l.014-.043c.116-.347.194-.582.301-.806a4.03 4.03 0 0 1 .46-.744c.153-.196.328-.371.587-.63l.031-.031zm2.78 1.06a1.216 1.216 0 0 0-1.72 0l-.182.182c.01.033.021.07.034.107c.094.27.273.63.611.968a2.553 2.553 0 0 0 1.075.645l.182-.182a1.216 1.216 0 0 0 0-1.72m-1.328 3.048a4.083 4.083 0 0 1-.99-.73a4.083 4.083 0 0 1-.73-.99L14.45 12.83c-.301.301-.407.409-.496.523c-.113.145-.21.302-.289.467c-.062.131-.111.274-.246.678l-.4 1.2l.283.283l1.2-.4c.404-.135.547-.184.678-.246c.165-.08.322-.176.467-.289c.114-.089.222-.195.523-.496zM7.25 9A.75.75 0 0 1 8 8.25h6.5a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75m0 4a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div
+        class="col authorise-stats-card"
+        (click)="openFilteredDocs('ACTIONER')"
+      >
+        <div class="row">
+          <div class="col-7">
+            <p class="authorise-stats-card-header">Actioned</p>
+            <p class="authorise-stats-card-number">
+              <span *ngIf="dashboardStatsLoader">
+                <p class="placeholder-glow">
+                  <span class="placeholder col-12"></span>
+                </p>
+              </span>
+              <span *ngIf="!dashboardStatsLoader">{{
+                dashboardStats.actioned
+              }}</span>
+            </p>
+            <p class="authorise-stats-card-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M11.1 3.002c-3.648.007-5.56.096-6.78 1.317C3.002 5.637 3.002 7.758 3.002 12s0 6.363 1.318 7.681s3.438 1.318 7.68 1.318s6.363 0 7.681-1.318c1.221-1.22 1.31-3.132 1.317-6.78m-.518-9.384l-5.548 5.534m5.549-5.534c-.494-.494-3.822-.448-4.525-.438m4.525.438c.494.495.448 3.826.438 4.53"
+                  color="currentColor"
+                />
+              </svg>
+              View
+            </p>
+          </div>
+          <div class="col-5 d-flex justify-content-center align-items-center">
+            <div class="authorise-stats-card-icon card-icon-actioned">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="3em"
+                height="3em"
+                viewBox="0 0 24 24"
+              >
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path
+                    d="M9.781 3.89c.564-.48.846-.72 1.14-.861a2.5 2.5 0 0 1 2.157 0c.295.14.577.38 1.14.861c.225.192.337.287.457.367a2.5 2.5 0 0 0 .908.376c.141.028.288.04.582.064c.739.058 1.108.088 1.416.197a2.5 2.5 0 0 1 1.525 1.524c.109.309.138.678.197 1.416c.023.294.035.441.063.583c.064.324.192.633.376.907c.08.12.176.232.367.457c.48.564.721.846.862 1.14a2.5 2.5 0 0 1 0 2.157c-.14.294-.381.576-.862 1.14a5.25 5.25 0 0 0-.367.457a2.497 2.497 0 0 0-.376.907c-.028.142-.04.289-.063.583c-.059.738-.088 1.108-.197 1.416a2.5 2.5 0 0 1-1.525 1.524c-.308.11-.677.139-1.416.197c-.294.024-.44.036-.582.064a2.5 2.5 0 0 0-.908.376a5.25 5.25 0 0 0-.456.367c-.564.48-.846.72-1.14.861a2.5 2.5 0 0 1-2.157 0c-.295-.14-.577-.38-1.14-.861a5.263 5.263 0 0 0-.457-.367a2.5 2.5 0 0 0-.908-.376a5.277 5.277 0 0 0-.582-.064c-.739-.058-1.108-.088-1.416-.197a2.5 2.5 0 0 1-1.525-1.524c-.109-.308-.138-.678-.197-1.416a5.186 5.186 0 0 0-.063-.583a2.5 2.5 0 0 0-.376-.907c-.08-.12-.176-.232-.367-.457c-.48-.564-.721-.846-.862-1.14a2.5 2.5 0 0 1 0-2.157c.141-.294.381-.576.862-1.14c.191-.225.287-.337.367-.457a2.5 2.5 0 0 0 .376-.907c.028-.142.04-.289.063-.583c.059-.738.088-1.107.197-1.416A2.5 2.5 0 0 1 6.42 4.894c.308-.109.677-.139 1.416-.197c.294-.024.44-.036.582-.064a2.5 2.5 0 0 0 .908-.376c.12-.08.232-.175.456-.367Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m8.5 12.5l2 2l5-5"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow-1">
+    <div class="row h-100 pt-4">
+      <div class="col-md-8 remove-padding">
+        <div class="authorise-section-card h-100">
+          <div class="authorise-workspace-header">
+            <svg
+              class="me-3"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.4em"
+              height="1.4em"
+              viewBox="0 0 24 24"
+            >
+              <g fill="none" stroke="#FF8E40" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l2.5 2.5"
+                />
+              </g>
+            </svg>
+            Recent Documents
+          </div>
+          <div class="mt-3">
+            <div
+              class="mt-3"
+            >
+              <div class="row authorise-workspace-table-header">
+                <div class="col-md-3">Name</div>
+                <div class="col-md-2">Created</div>
+                <div class="col-md-2">Status</div>
+                <div class="col-md-3">Created By</div>
+                <div class="col-md-2">Collaborators</div>
+              </div>
+  
+              <!--          <nz-spin nzTip="Loading..." [nzSpinning]="fetchDocumentsLoader">-->
+              <!--            <div *ngIf="!fetchDocumentsLoader">-->
+                <div style="max-height: calc(100vh - 461px); overflow-y: scroll;">
+                  <div
+                class="row authorise-workspace-table-data"
+                *ngFor="let document of documents"
+                (click)="viewDocument(document.id)"
+              >
+                <div class="col-md-3">
+                  <div class="d-flex">
+                    <div class="document-name-icon">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1.4em"
+                        height="1.4em"
+                        viewBox="0 0 24 24"
+                      >
+                        <g
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          color="currentColor"
+                        >
+                          <path
+                            d="M15 2.5V4c0 1.414 0 2.121.44 2.56C15.878 7 16.585 7 18 7h1.5"
+                          />
+                          <path
+                            d="M4 16V8c0-2.828 0-4.243.879-5.121C5.757 2 7.172 2 10 2h4.172c.408 0 .613 0 .797.076c.183.076.328.22.617.51l3.828 3.828c.29.29.434.434.51.618c.076.183.076.388.076.796V16c0 2.828 0 4.243-.879 5.121C18.243 22 16.828 22 14 22h-4c-2.828 0-4.243 0-5.121-.879C4 20.243 4 18.828 4 16m4-5h8m-8 3h8m-8 3h4.17"
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="document-name-text">
+                      <span
+                        [nzTooltipTitle]="document.template.description"
+                        nzTooltipPlacement="bottom"
+                        nz-tooltip
+                      >
+                        {{ document.template.title }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <p class="authorise-workspace-table-p">
+                    {{ document.createdAt | date: "dd MMMM yyyy" }}
+                  </p>
+                  <p class="authorise-workspace-table-p">
+                    {{ document.createdAt | date: "HH:mm:ss" }}
+                  </p>
+                </div>
+                <div class="col-md-2">
+                  <authorise-doc-status [status]="document.status" />
+                </div>
+                <div class="col-md-3">
+                  {{ document.owner }}
+                </div>
+                <div class="col-md-2">
+                  <nz-avatar-group>
+                    <nz-avatar
+                      *ngFor="let actioner of document.actioners; let i = index"
+                      style="background-color: #f56a00"
+                      [nzText]="actioner.actioner.substring(0, 2).toUpperCase()"
+                      [nzTooltipTitle]="actioner.actioner"
+                      nzTooltipPlacement="bottom"
+                      nz-tooltip
+                    ></nz-avatar>
+                  </nz-avatar-group>
+                </div>
+              </div>
+                </div>
+              
+              <!--            </div>-->
+              <!--          </nz-spin>-->
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4 remove-padding">
+        <div class="authorise-section-card h-100">
+          <div class="authorise-workspace-header">
+            <svg
+              class="me-3"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.4em"
+              height="1.4em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M14.254 1.365c-1.096-.306-2.122.024-2.851.695c-.719.66-1.153 1.646-1.153 2.7v6.695a2.295 2.295 0 0 0 2.295 2.295h6.694c1.055 0 2.042-.434 2.701-1.153c.67-.729 1.001-1.755.695-2.851a12.1 12.1 0 0 0-8.38-8.381M11.75 4.76c0-.652.27-1.232.668-1.597c.386-.355.886-.508 1.433-.355c3.55.991 6.349 3.79 7.34 7.34c.153.548 0 1.048-.355 1.434c-.365.397-.945.667-1.597.667h-6.694a.795.795 0 0 1-.795-.795z"
+                clip-rule="evenodd"
+              />
+              <path
+                fill="currentColor"
+                d="M8.672 4.716a.75.75 0 0 0-.45-1.432C4.183 4.554 1.25 8.328 1.25 12.79c0 5.501 4.46 9.961 9.96 9.961a9.96 9.96 0 0 0 9.505-6.973a.75.75 0 1 0-1.43-.45a8.465 8.465 0 0 1-8.074 5.923a8.46 8.46 0 0 1-8.461-8.46a8.465 8.465 0 0 1 5.922-8.074"
+              />
+            </svg>
+            Summary
+          </div>
+          <div class="mt-3">
+            <div id="container" style="max-height: calc(100vh - 600px)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+  <!-- <div class="mt-3 d-flex">
+    <div>
+      <img
+        src="/assets/images/illustrations/workspace-welcome.svg"
+        alt=""
+        style="max-width: 100px; width: 100px"
+      />
+    </div>
+    <div class="ms-3">
+      <h3>Hi {{ user.name }}</h3>
+      <p>
+        You currently have
+        {{ dashboardStats ? dashboardStats.pending : "..." }} documents waiting
+        on you
+      </p>
+    </div>
+  </div> -->
+
+  
+
+  

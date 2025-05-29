@@ -1,0 +1,835 @@
+<div>
+  <nz-page-header
+    class="site-page-header"
+    (nzBack)="onBack()"
+    nzBackIcon
+    nzTitle="Go Back"
+    nzSubtitle="Navigate to view all documents"
+  >
+    <nz-breadcrumb nz-page-header-breadcrumb>
+      <nz-breadcrumb-item routerLink="../../../workspace">
+        <span nz-icon nzType="home"></span>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        <a routerLink="../../all">All Documents</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>View Document</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </nz-page-header>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="authorise-editor-toolbar mb-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <!-- <button
+            nzTooltipTitle="Revision History"
+            nzTooltipPlacement="top"
+            nz-tooltip
+            nz-button
+            class="authorise-editor-button"
+          >
+            <span nz-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M5.079 5.069c3.795-3.79 9.965-3.75 13.783.069c3.82 3.82 3.86 9.993.064 13.788s-9.968 3.756-13.788-.064a9.81 9.81 0 0 1-2.798-8.28a.75.75 0 1 1 1.487.203a8.31 8.31 0 0 0 2.371 7.017c3.245 3.244 8.468 3.263 11.668.064c3.199-3.2 3.18-8.423-.064-11.668c-3.243-3.242-8.463-3.263-11.663-.068l.748.003a.75.75 0 1 1-.007 1.5l-2.546-.012a.75.75 0 0 1-.746-.747L3.575 4.33a.75.75 0 1 1 1.5-.008zm6.92 2.18a.75.75 0 0 1 .75.75v3.69l2.281 2.28a.75.75 0 1 1-1.06 1.061l-2.72-2.72V8a.75.75 0 0 1 .75-.75"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            nzTooltipTitle="Comment on Document"
+            nzTooltipPlacement="top"
+            nz-tooltip
+            nz-button
+            class="authorise-editor-button"
+            (click)="openAddDocumentComment()"
+          >
+            <span nz-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <g fill="none">
+                  <path
+                    fill="currentColor"
+                    d="m13.087 21.388l.645.382zm.542-.916l-.646-.382zm-3.258 0l-.645.382zm.542.916l.646-.382zm-8.532-5.475l.693-.287zm5.409 3.078l-.013.75zm-2.703-.372l-.287.693zm16.532-2.706l.693.287zm-5.409 3.078l-.012-.75zm2.703-.372l.287.693zm.7-15.882l-.392.64zm1.65 1.65l.64-.391zM4.388 2.738l-.392-.64zm-1.651 1.65l-.64-.391zM9.403 19.21l.377-.649zm4.33 2.56l.541-.916l-1.29-.764l-.543.916zm-4.007-.916l.542.916l1.29-.764l-.541-.916zm2.715.152a.52.52 0 0 1-.882 0l-1.291.764c.773 1.307 2.69 1.307 3.464 0zM10.5 2.75h3v-1.5h-3zm10.75 7.75v1h1.5v-1zm-18.5 1v-1h-1.5v1zm-1.5 0c0 1.155 0 2.058.05 2.787c.05.735.153 1.347.388 1.913l1.386-.574c-.147-.352-.233-.782-.278-1.441c-.046-.666-.046-1.51-.046-2.685zm6.553 6.742c-1.256-.022-1.914-.102-2.43-.316L4.8 19.313c.805.334 1.721.408 2.977.43zM1.688 16.2A5.75 5.75 0 0 0 4.8 19.312l.574-1.386a4.25 4.25 0 0 1-2.3-2.3zm19.562-4.7c0 1.175 0 2.019-.046 2.685c-.045.659-.131 1.089-.277 1.441l1.385.574c.235-.566.338-1.178.389-1.913c.05-.729.049-1.632.049-2.787zm-5.027 8.241c1.256-.021 2.172-.095 2.977-.429l-.574-1.386c-.515.214-1.173.294-2.428.316zm4.704-4.115a4.25 4.25 0 0 1-2.3 2.3l.573 1.386a5.75 5.75 0 0 0 3.112-3.112zM13.5 2.75c1.651 0 2.837 0 3.762.089c.914.087 1.495.253 1.959.537l.783-1.279c-.739-.452-1.577-.654-2.6-.752c-1.012-.096-2.282-.095-3.904-.095zm9.25 7.75c0-1.622 0-2.891-.096-3.904c-.097-1.023-.299-1.862-.751-2.6l-1.28.783c.285.464.451 1.045.538 1.96c.088.924.089 2.11.089 3.761zm-3.53-7.124a4.25 4.25 0 0 1 1.404 1.403l1.279-.783a5.75 5.75 0 0 0-1.899-1.899zM10.5 1.25c-1.622 0-2.891 0-3.904.095c-1.023.098-1.862.3-2.6.752l.783 1.28c.464-.285 1.045-.451 1.96-.538c.924-.088 2.11-.089 3.761-.089zM2.75 10.5c0-1.651 0-2.837.089-3.762c.087-.914.253-1.495.537-1.959l-1.279-.783c-.452.738-.654 1.577-.752 2.6C1.25 7.61 1.25 8.878 1.25 10.5zm1.246-8.403a5.75 5.75 0 0 0-1.899 1.899l1.28.783a4.25 4.25 0 0 1 1.402-1.403zm7.02 17.993c-.202-.343-.38-.646-.554-.884a2.2 2.2 0 0 0-.682-.645l-.754 1.297c.047.028.112.078.224.232c.121.166.258.396.476.764zm-3.24-.349c.44.008.718.014.93.037c.198.022.275.054.32.08l.754-1.297a2.2 2.2 0 0 0-.909-.274c-.298-.033-.657-.038-1.069-.045zm6.498 1.113c.218-.367.355-.598.476-.764c.112-.154.177-.204.224-.232l-.754-1.297c-.29.17-.5.395-.682.645c-.173.238-.352.54-.555.884zm1.924-2.612c-.412.007-.771.012-1.069.045c-.311.035-.616.104-.909.274l.754 1.297c.045-.026.122-.058.32-.08c.212-.023.49-.03.93-.037z"
+                  />
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    d="M8 9h8m-8 3.5h5.5"
+                  />
+                </g>
+              </svg>
+            </span>
+          </button> -->
+
+          <button
+            nzTooltipTitle="Share Document"
+            nzTooltipPlacement="top"
+            nz-tooltip
+            nz-button
+            class="authorise-editor-button"
+            (click)="showModal('share')"
+          >
+            <span nz-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  color="currentColor"
+                >
+                  <path
+                    d="m20.393 8.032l-1.747-1.517c-1.259-1.093-1.752-1.681-2.434-1.474c-.85.26-.57 1.895-.57 2.447c-1.321 0-2.695-.101-3.998.11c-4.3.7-5.644 3.759-5.644 7.055c1.217-.747 2.433-1.578 3.895-1.924c1.826-.432 3.865-.226 5.747-.226c0 .552-.28 2.188.57 2.447c.772.236 1.175-.38 2.434-1.473l1.747-1.517C21.464 11.03 22 10.564 22 9.996s-.536-1.034-1.607-1.964"
+                  />
+                  <path
+                    d="M10.568 3c-3.86.007-5.882.102-7.174 1.39C2 5.783 2 8.022 2 12.5s0 6.717 1.394 8.109C4.788 22 7.032 22 11.52 22s6.73 0 8.125-1.391C20.615 19.64 20.91 18.26 21 16"
+                  />
+                </g>
+              </svg>
+            </span>
+          </button>
+
+          <button
+            nzTooltipTitle="Export to PDF"
+            nzTooltipPlacement="top"
+            nz-tooltip
+            nz-button
+            class="authorise-editor-button"
+            (click)="generatePDF()"
+          >
+            <span nz-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  color="currentColor"
+                >
+                  <path
+                    d="M3.5 13v-.804c0-2.967 0-4.45.469-5.636c.754-1.905 2.348-3.407 4.37-4.118C9.595 2 11.168 2 14.318 2c1.798 0 2.698 0 3.416.253c1.155.406 2.066 1.264 2.497 2.353c.268.677.268 1.525.268 3.22V13"
+                  />
+                  <path
+                    d="M3.5 12a3.333 3.333 0 0 1 3.333-3.333c.666 0 1.451.116 2.098-.057a1.67 1.67 0 0 0 1.179-1.18c.173-.647.057-1.432.057-2.098A3.333 3.333 0 0 1 13.5 2m-10 20v-3m0 0v-1.8c0-.566 0-.848.176-1.024C3.85 16 4.134 16 4.7 16h.8a1.5 1.5 0 0 1 0 3zm17-3H19c-.943 0-1.414 0-1.707.293S17 17.057 17 18v1m0 3v-3m0 0h2.5M14 19a3 3 0 0 1-3 3c-.374 0-.56 0-.7-.08c-.333-.193-.3-.582-.3-.92v-4c0-.338-.033-.727.3-.92c.14-.08.326-.08.7-.08a3 3 0 0 1 3 3"
+                  />
+                </g>
+              </svg>
+            </span>
+          </button>
+
+          <!--          <button nzTooltipTitle="Export to Word" nzTooltipPlacement="top" nz-tooltip nz-button class="authorise-editor-button">-->
+          <!--      <span nz-icon>-->
+          <!--        <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor"><path d="M3.5 13v-.804c0-2.967 0-4.45.469-5.636c.754-1.905 2.348-3.407 4.37-4.118C9.595 2 11.168 2 14.318 2c1.798 0 2.698 0 3.416.253c1.155.406 2.066 1.264 2.497 2.353c.268.677.268 1.525.268 3.22V13"/><path d="M3.5 12a3.333 3.333 0 0 1 3.333-3.333c.666 0 1.451.116 2.098-.057a1.67 1.67 0 0 0 1.179-1.18c.173-.647.057-1.432.057-2.098A3.333 3.333 0 0 1 13.5 2m7 15.22c-.051-1.19-.826-1.22-1.877-1.22c-1.619 0-1.887.406-1.887 2v2c0 1.594.268 2 1.887 2c1.051 0 1.826-.03 1.878-1.22M7.266 19c0 1.657-1.264 3-2.824 3c-.352 0-.528 0-.659-.08c-.313-.193-.282-.582-.282-.92v-4c0-.338-.031-.727.282-.92c.131-.08.307-.08.66-.08c1.559 0 2.823 1.343 2.823 3M12 22c-.888 0-1.331 0-1.607-.293s-.276-.764-.276-1.707v-2c0-.943 0-1.414.276-1.707S11.113 16 12 16s1.33 0 1.606.293s.276.764.276 1.707v2c0 .943 0 1.414-.276 1.707C13.331 22 12.887 22 12 22"/></g></svg>-->
+          <!--      </span>-->
+          <!--          </button>-->
+        </div>
+
+        <div *ngIf="document">
+          <div>
+            <button
+              nz-button
+              class="authorise-editor-button"
+              (click)="showModal('approve')"
+              [disabled]="!document.nextActioners.includes(user.email)"
+            >
+              <span nz-icon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.4em"
+                  height="1.4em"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m8.5 12.5l2 2l5-5"
+                    />
+                  </g>
+                </svg>
+              </span>
+              Approve
+            </button>
+
+            <button
+              nz-button
+              class="authorise-editor-button"
+              (click)="showModal('decline')"
+              [disabled]="!document.nextActioners.includes(user.email)"
+            >
+              <span nz-icon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.4em"
+                  height="1.4em"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
+                  </g>
+                </svg>
+              </span>
+              Decline
+            </button>
+
+            <button
+              nz-button
+              class="authorise-editor-button"
+              (click)="showModal('pause')"
+              [disabled]="!document.nextActioners.includes(user.email)"
+            >
+              <span nz-icon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.4em"
+                  height="1.4em"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                      d="M8 9.5c0-.466 0-.699.076-.883a1 1 0 0 1 .541-.54C8.801 8 9.034 8 9.5 8s.699 0 .883.076a1 1 0 0 1 .54.541c.077.184.077.417.077.883v5c0 .466 0 .699-.076.883a1 1 0 0 1-.541.54C10.199 16 9.966 16 9.5 16s-.699 0-.883-.076a1 1 0 0 1-.54-.541C8 15.199 8 14.966 8 14.5zm5 0c0-.466 0-.699.076-.883a1 1 0 0 1 .541-.54C13.801 8 14.034 8 14.5 8s.699 0 .883.076a1 1 0 0 1 .54.541c.077.184.077.417.077.883v5c0 .466 0 .699-.076.883a1 1 0 0 1-.541.54c-.184.077-.417.077-.883.077s-.699 0-.883-.076a1 1 0 0 1-.54-.541C13 15.199 13 14.966 13 14.5z"
+                    />
+                  </g>
+                </svg>
+              </span>
+              Pause
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="authorise-document-a4-page-container">
+      <div *ngIf="getDocumentLoader">
+        <nz-skeleton [nzActive]="true"></nz-skeleton>
+      </div>
+      <div *ngIf="!getDocumentLoader">
+        <div class="authorise-document-a4-page" id="authorise-document">
+          <div class="d-flex flex-column h-100">
+            <div class="flex-grow-1">
+              <div class="authorise-document-content h-100">
+                <div class="d-flex flex-column justify-content-between h-100">
+                  <div>
+                    <ng-template #commentTemplate>
+                      <div class="comment-popup">
+                        <textarea [(ngModel)]="commentText"></textarea>
+                        <button (click)="saveComment()">Save</button>
+                      </div>
+                    </ng-template>
+
+                    <div *ngIf="!getDocumentLoader && document">
+                      <div>
+                        <div class="d-flex justify-content-center">
+                          <h1>{{ document.template.title }}</h1>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                          <p>{{ document.template.description }}</p>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                          <authorise-doc-status [status]="document.status" />
+                        </div>
+                      </div>
+
+                      <hr />
+
+                      <div class="mt-3" *ngIf="document && !getDocumentLoader">
+                        <app-form-view
+                          [blocks]="document.form.blocks"
+                          (selectInputValue)="logSelectedText($event)"
+                        ></app-form-view>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <div *ngIf="document">
+                        <div *ngFor="let actioner of document.actioners" class="col-md-4">
+                          <div *ngIf="actioner.signature" >
+                            <img
+                              [src]="actioner.signature"
+                              alt=""
+                              style="max-width: 150px"
+                            />
+                            <br />
+                            {{ actioner.actioner }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <hr />
+              <div class="d-flex justify-content-center">
+                <p class="authorise-document-a4-page-footer">
+                  This document was generated by AuthOrise ©
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="col-md-4 authorise-document-edit-tools-container">
+      <div class="row h-100">
+        <div class="col authorise-form-builder-tools-content">
+          <div *ngIf="currentViewOption == 0">
+            <div *ngIf="document">
+              <h5>Collaborators</h5>
+              <div class="mt-3">
+                <div *ngFor="let actioner of document.actioners" class="mb-2">
+                  <div class="d-flex" [ngClass]="actioner.role == 'OWNER'? 'doc-owner-space' : ''">
+                    <div>
+                      <nz-badge [nzCount]="(actioner.role !== 'OWNER' ? iconActionerTemplate : iconOwnerTemplate)">
+                        <nz-avatar
+                        [nzSize]="50"
+                        [nzText]="
+                          actioner.actioner.substring(0, 2).toUpperCase()
+                        "
+                        [ngStyle]="{
+                          color: actioner.role === 'OWNER' ? 'rgb(207, 19, 34)' : '#f56a00',
+                          backgroundColor: actioner.role === 'OWNER' ? 'rgb(255, 241, 240)' : '#fde3cf'
+                        }"
+                      ></nz-avatar>
+                      </nz-badge>
+                      <ng-template #iconActionerTemplate>
+                        <span *ngIf="actioner.signature" nz-icon nzType="check-circle" class="ant-scroll-number-custom-component" style="color: #17cb50"></span>
+                      </ng-template>
+                      <ng-template #iconOwnerTemplate>
+                        <span nz-icon nzType="edit" class="ant-scroll-number-custom-component" style="color: #3b3b3b"></span>
+                      </ng-template>
+                      
+                    </div>
+                    <div class="flex-grow-1 ms-3" style="font-size: 14px">
+                      <div>
+                        <div>{{ actioner.actioner }}</div>
+                        <div>
+                          <nz-tag [nzColor]="actioner.role === 'OWNER' ? 'red' : 'orange'" [nzBordered]="false">{{
+                            actioner.role
+                          }}</nz-tag>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="currentViewOption == 1">
+            <div *ngIf="document">
+              <h5>Comments</h5>
+
+              <div class="comments-container">
+                <div class="comments-top-section">
+                  <div *ngIf="document.comments.length == 0">
+                    <nz-empty></nz-empty>
+                  </div>
+                  <div *ngIf="document.comments.length > 0">
+                    <div *ngFor="let comment of document.comments">
+                      <nz-comment
+                        [nzAuthor]="comment.author"
+                        [nzDatetime]="comment.createdAt"
+                      >
+                        <nz-avatar
+                          nz-comment-avatar
+                          [nzText]="
+                            comment.author.substring(0, 2).toUpperCase()
+                          "
+                          style="color: #f56a00; background-color: #fde3cf"
+                        ></nz-avatar>
+                        <nz-comment-content>
+                          <p>
+                            {{ comment.message }}
+                          </p>
+                        </nz-comment-content>
+                      </nz-comment>
+                    </div>
+                  </div>
+                </div>
+                <div class="comments-bottom-section"></div>
+              </div>
+            </div>
+
+            <div>
+              <nz-input-group
+                [nzPrefix]="prefixTemplateAttachment"
+                [nzAddOnAfter]="addOnAfterTemplate"
+              >
+                <input
+                  nz-input
+                  placeholder="Message"
+                  [(ngModel)]="commentDocumentForm.message"
+                />
+              </nz-input-group>
+
+              <ng-template #prefixTemplateAttachment>
+                <span
+                  nz-icon
+                  nzType="paper-clip"
+                  nz-popover
+                  [nzPopoverTitle]="titleTemplate"
+                  [nzPopoverContent]="contentTemplate"
+                ></span>
+                <ng-template #titleTemplate>Add an attachment</ng-template>
+                <ng-template #contentTemplate>
+                  <nz-upload
+                    nzType="drag"
+                    [nzMultiple]="true"
+                    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    [(nzFileList)]="fileList"
+                    [nzBeforeUpload]="beforeUpload"
+                  >
+                    <p class="ant-upload-drag-icon">
+                      <span nz-icon nzType="plus"></span>
+                    </p>
+                    <p class="ant-upload-text">Click to upload</p>
+                  </nz-upload>
+                </ng-template>
+              </ng-template>
+              <ng-template #addOnAfterTemplate>
+                <button nz-button nzType="primary" (click)="commentDocument()">
+                  <span nz-icon>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1.4em"
+                      height="1.4em"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M6 12L3.269 3.125A59.8 59.8 0 0 1 21.486 12a59.8 59.8 0 0 1-18.217 8.875zm0 0h7.5"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </ng-template>
+            </div>
+          </div>
+
+          <div *ngIf="currentViewOption == 2">
+            <div *ngIf="document">
+              <h5>Linked Documents</h5>
+
+              <div class="mt-3">
+                <div *ngIf="document.comments.length == 0">
+                  <nz-empty></nz-empty>
+                </div>
+                <div *ngIf="document.comments.length > 0">
+                  <div *ngFor="let linkedDoc of document.linkedDocuments">
+                    {{ linkedDoc.title }}
+                    {{ linkedDoc.description }}
+                    {{ linkedDoc.creator }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="currentViewOption == 3">
+            <div *ngIf="document">
+              <h5>Activity</h5>
+
+              <div class="mt-3">
+                <nz-timeline>
+                  <nz-timeline-item *ngFor="let audit of document.audit">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <nz-tag nzColor="yellow" [nzBordered]="false">{{
+                          audit.action
+                        }}</nz-tag>
+                        {{ audit.message }}
+                      </div>
+                      <div class="authorise-audit-timeline-date">
+                        {{ audit.createdAt | date: "dd MMM yyyy" }}
+                        {{ audit.createdAt | date: "HH:mm" }}
+                      </div>
+                    </div>
+
+                    <div>by {{ audit.author }}</div>
+                  </nz-timeline-item>
+                </nz-timeline>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col content-tabs">
+          <ul class="authorise-edit-tabs">
+            <li
+              [ngClass]="
+                currentViewOption == i ? 'authorise-edit-tab-li-active' : ''
+              "
+              class="authorise-edit-tab-li"
+              *ngFor="let item of documentViewOptions; let i = index"
+              (click)="selectViewOption(i)"
+            >
+              <ng-container
+                *ngTemplateOutlet="getViewOption(item.name)"
+              ></ng-container>
+            </li>
+
+            <ng-template #collaboratorsTemplate>
+              <svg
+                nzTooltipTitle="Collaborators"
+                nzTooltipPlacement="left"
+                nz-tooltip
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M15.5 7.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0m2.5 9c0 1.933-2.686 3.5-6 3.5s-6-1.567-6-3.5S8.686 13 12 13s6 1.567 6 3.5M7.122 5q.267 0 .518.05A5 5 0 0 0 7 7.5c0 .868.221 1.685.61 2.396q-.237.045-.488.045c-1.414 0-2.561-1.106-2.561-2.47S5.708 5 7.122 5M5.447 18.986C4.88 18.307 4.5 17.474 4.5 16.5c0-.944.357-1.756.896-2.423C3.49 14.225 2 15.267 2 16.529c0 1.275 1.517 2.325 3.447 2.457M17 7.5c0 .868-.221 1.685-.61 2.396q.236.045.488.045c1.414 0 2.56-1.106 2.56-2.47S18.293 5 16.879 5q-.267 0-.518.05c.407.724.64 1.56.64 2.45m1.552 11.486c1.93-.132 3.447-1.182 3.447-2.457c0-1.263-1.491-2.304-3.396-2.452c.54.667.896 1.479.896 2.423c0 .974-.38 1.807-.947 2.486"
+                />
+              </svg>
+            </ng-template>
+
+            <ng-template #commentsTemplate>
+              <svg
+                nzTooltipTitle="Comments"
+                nzTooltipPlacement="left"
+                nz-tooltip
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="m13.087 21.388l.542-.916c.42-.71.63-1.066.968-1.262c.338-.197.763-.204 1.613-.219c1.256-.021 2.043-.098 2.703-.372a5 5 0 0 0 2.706-2.706C22 14.995 22 13.83 22 11.5v-1c0-3.273 0-4.91-.737-6.112a5 5 0 0 0-1.65-1.651C18.41 2 16.773 2 13.5 2h-3c-3.273 0-4.91 0-6.112.737a5 5 0 0 0-1.651 1.65C2 5.59 2 7.228 2 10.5v1c0 2.33 0 3.495.38 4.413a5 5 0 0 0 2.707 2.706c.66.274 1.447.35 2.703.372c.85.015 1.275.022 1.613.219c.337.196.548.551.968 1.262l.542.916c.483.816 1.69.816 2.174 0M16 12a1 1 0 1 0 0-2a1 1 0 0 0 0 2m-3-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 1a1 1 0 1 0 0-2a1 1 0 0 0 0 2"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </ng-template>
+
+            <ng-template #linkedDocumentsTemplate>
+              <svg
+                nzTooltipTitle="Linked Documents"
+                nzTooltipPlacement="left"
+                nz-tooltip
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M4.172 3.172C3 4.343 3 6.229 3 10v4c0 3.771 0 5.657 1.172 6.828S7.229 22 11 22h2c3.771 0 5.657 0 6.828-1.172S21 17.771 21 14v-4c0-3.771 0-5.657-1.172-6.828S16.771 2 13 2h-2C7.229 2 5.343 2 4.172 3.172M7.25 8A.75.75 0 0 1 8 7.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 8m0 4a.75.75 0 0 1 .75-.75h8a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75M8 15.25a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </ng-template>
+
+            <ng-template #activityDocumentsTemplate>
+              <svg
+                nzTooltipTitle="Activity"
+                nzTooltipPlacement="left"
+                nz-tooltip
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <defs>
+                  <mask id="solarClockCircleBold0">
+                    <g fill="none">
+                      <path
+                        fill="#fff"
+                        d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10"
+                      />
+                      <path
+                        fill="#000"
+                        fill-rule="evenodd"
+                        d="M12 7.25a.75.75 0 0 1 .75.75v3.69l2.28 2.28a.75.75 0 1 1-1.06 1.06l-2.5-2.5a.75.75 0 0 1-.22-.53V8a.75.75 0 0 1 .75-.75"
+                        clip-rule="evenodd"
+                      />
+                    </g>
+                  </mask>
+                </defs>
+                <path
+                  fill="currentColor"
+                  d="M0 0h24v24H0z"
+                  mask="url(#solarClockCircleBold0)"
+                />
+              </svg>
+            </ng-template>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalTitle></ng-template>
+
+  <ng-template #modalContent>
+    <div *ngIf="actionModal.share">
+      <h5>Share Document</h5>
+      <form [formGroup]="shareDocumentForm">
+        <nz-form-item>
+          <input nz-input placeholder="Email" formControlName="email" />
+        </nz-form-item>
+        <nz-form-item>
+          <button
+            nz-button
+            nzType="primary"
+            type="submit"
+            (click)="shareDocument()"
+          >
+            <span nz-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.4em"
+                height="1.4em"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  color="currentColor"
+                >
+                  <path
+                    d="m20.393 8.032l-1.747-1.517c-1.259-1.093-1.752-1.681-2.434-1.474c-.85.26-.57 1.895-.57 2.447c-1.321 0-2.695-.101-3.998.11c-4.3.7-5.644 3.759-5.644 7.055c1.217-.747 2.433-1.578 3.895-1.924c1.826-.432 3.865-.226 5.747-.226c0 .552-.28 2.188.57 2.447c.772.236 1.175-.38 2.434-1.473l1.747-1.517C21.464 11.03 22 10.564 22 9.996s-.536-1.034-1.607-1.964"
+                  />
+                  <path
+                    d="M10.568 3c-3.86.007-5.882.102-7.174 1.39C2 5.783 2 8.022 2 12.5s0 6.717 1.394 8.109C4.788 22 7.032 22 11.52 22s6.73 0 8.125-1.391C20.615 19.64 20.91 18.26 21 16"
+                  />
+                </g>
+              </svg>
+            </span>
+            Share
+          </button>
+        </nz-form-item>
+      </form>
+    </div>
+
+    <div *ngIf="actionModal.decline || actionModal.pause">
+      <input
+        nz-input
+        placeholder="Reason"
+        [(ngModel)]="actionDocumentForm.reason"
+      />
+    </div>
+    <div *ngIf="actionModal.signature">
+      <label
+        nz-checkbox
+        [(ngModel)]="useSavedSignature"
+        (ngModelChange)="checkIfUserHasSavedSignature()"
+        >Use saved signature</label
+      >
+
+      <div *ngIf="!useSavedSignature">
+        <app-signature
+          (signatureChanged)="signatureChanged($event)"
+        ></app-signature>
+      </div>
+      <div class="mt-3" *ngIf="useSavedSignature">
+        <img [src]="signature" alt="" style="max-width: 150px" />
+      </div>
+    </div>
+
+    <div *ngIf="actionModal.approve">
+      <button
+        nz-button
+        nzType="primary"
+        type="submit"
+        (click)="actionDocument('APPROVE')"
+      >
+        <span nz-icon>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.4em"
+            height="1.4em"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              color="currentColor"
+            >
+              <path
+                d="M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10q-.002-1.03-.2-2"
+              />
+              <path d="M8 12.5s1.5 0 3.5 3.5c0 0 5.559-9.167 10.5-11" />
+            </g>
+          </svg>
+        </span>
+        Approve
+      </button>
+    </div>
+
+    <div *ngIf="actionModal.decline">
+      <button
+        nz-button
+        nzType="primary"
+        type="submit"
+        (click)="actionDocument('DECLINE')"
+      >
+        <span nz-icon>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.4em"
+            height="1.4em"
+            viewBox="0 0 24 24"
+          >
+            <g fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
+            </g>
+          </svg>
+        </span>
+        Decline
+      </button>
+    </div>
+
+    <div *ngIf="actionModal.pause">
+      <button
+        nz-button
+        nzType="primary"
+        type="submit"
+        (click)="actionDocument('PAUSE')"
+      >
+        <span nz-icon>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.4em"
+            height="1.4em"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M4 7c0-1.414 0-2.121.44-2.56C4.878 4 5.585 4 7 4s2.121 0 2.56.44C10 4.878 10 5.585 10 7v10c0 1.414 0 2.121-.44 2.56C9.122 20 8.415 20 7 20s-2.121 0-2.56-.44C4 19.122 4 18.415 4 17zm10 0c0-1.414 0-2.121.44-2.56C14.878 4 15.585 4 17 4s2.121 0 2.56.44C20 4.878 20 5.585 20 7v10c0 1.414 0 2.121-.44 2.56c-.439.44-1.146.44-2.56.44s-2.121 0-2.56-.44C14 19.122 14 18.415 14 17z"
+              color="currentColor"
+            />
+          </svg>
+        </span>
+        Pause
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter></ng-template>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="isCommentDocumentVisible"
+  [nzTitle]="commentDocumentModalTitle"
+  [nzContent]="commentDocumentModalContent"
+  [nzFooter]="commentDocumentModalFooter"
+  (nzOnCancel)="handleCommentDocumentModalCancel()"
+>
+  <ng-template #commentDocumentModalTitle></ng-template>
+
+  <ng-template #commentDocumentModalContent>
+    <div class="authorise-highlighted-text">
+      " {{ addDocumentCommentForm.value }} "
+    </div>
+    <div>
+      <nz-form-item>
+        <input
+          nz-input
+          placeholder="Message"
+          [(ngModel)]="addDocumentCommentForm.message"
+        />
+      </nz-form-item>
+      <nz-form-item>
+        <button
+          nz-button
+          nzType="primary"
+          type="submit"
+          (click)="updateDocument()"
+        >
+          <span nz-icon>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.4em"
+              height="1.4em"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                color="currentColor"
+              >
+                <path
+                  d="m20.393 8.032l-1.747-1.517c-1.259-1.093-1.752-1.681-2.434-1.474c-.85.26-.57 1.895-.57 2.447c-1.321 0-2.695-.101-3.998.11c-4.3.7-5.644 3.759-5.644 7.055c1.217-.747 2.433-1.578 3.895-1.924c1.826-.432 3.865-.226 5.747-.226c0 .552-.28 2.188.57 2.447c.772.236 1.175-.38 2.434-1.473l1.747-1.517C21.464 11.03 22 10.564 22 9.996s-.536-1.034-1.607-1.964"
+                />
+                <path
+                  d="M10.568 3c-3.86.007-5.882.102-7.174 1.39C2 5.783 2 8.022 2 12.5s0 6.717 1.394 8.109C4.788 22 7.032 22 11.52 22s6.73 0 8.125-1.391C20.615 19.64 20.91 18.26 21 16"
+                />
+              </g>
+            </svg>
+          </span>
+          Submit
+        </button>
+      </nz-form-item>
+    </div>
+  </ng-template>
+
+  <ng-template #commentDocumentModalFooter></ng-template>
+</nz-modal>

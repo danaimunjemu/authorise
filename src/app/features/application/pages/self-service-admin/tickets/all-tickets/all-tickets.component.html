@@ -1,0 +1,63 @@
+<div class="d-flex flex-column h-100">
+  <div>
+    <nav class="navbar navbar-expand-lg remove-padding" style="padding: 0;">
+      <div class="container-fluid remove-padding">
+        <a class="navbar-brand">Tickets</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li> -->
+          </ul>
+          <div class="d-flex">
+              <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                  <input type="text" nz-input placeholder="Search Ticket" style="background-color: white;" />
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                  <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+                </ng-template>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="flex-grow-1" style="padding-top: 1rem;">
+    @if (tickets) {
+      <nz-table #basicTable [nzData]="tickets" nzShowPagination
+      nzShowSizeChanger [nzTotal]="tickets.length" [nzPageSizeOptions]="[5, 10, 20]"
+      >
+          <thead>
+            <tr>
+              <th>Ticket ID</th>
+              <th>Service</th>
+              <th>Status</th>
+              <th>Message</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (data of basicTable.data; track data) {
+              <tr>
+                <td>{{ data.ticketId }}</td>
+                <td>{{ data.service }}</td>
+                <td>{{ data.status }}</td>
+                <td>{{ data.message }}</td>
+                <td>
+                  <a (click)="viewTicket(data)">View</a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </nz-table>
+  }
+  
+  @if (!tickets) {
+      <nz-skeleton [nzActive]="true"></nz-skeleton>
+  }
+  </div>
+</div>
+
+

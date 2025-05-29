@@ -1,0 +1,30 @@
+@import "typography";
+
+#show_bg {
+  background-image:
+    linear-gradient(to left, rgba(66, 70, 82, 0.52), rgba(29, 31, 42, 1)),
+    url("/assets/images/stock-images/authorise-auth-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  color: white;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.layout-footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  font-family: $font-space-mono;
+  font-size: 12px;
+}
+
+.layout-logo {
+  padding: 30px;
+}
+
+.layout-left-content {
+  margin-left: 80px;
+}

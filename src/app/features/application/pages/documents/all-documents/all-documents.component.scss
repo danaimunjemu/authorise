@@ -1,0 +1,83 @@
+@import "colours";
+
+.authorise-workspace-table-header {
+  text-transform: uppercase;
+  //background: linear-gradient(135deg, #00bcd4, #2ebd59);
+  background: #EAEDF0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 15px 10px;
+  font-weight: 900;
+  color: #91999C;
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.authorise-workspace-table-data {
+  margin: 10px 10px 0 10px;
+  background: rgb(255, 255, 255);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-weight: 600;
+  color: #677074;
+  font-size: 13px;
+  border: 1px solid transparent;
+  //border-left: 5px solid #677074;
+  transition-duration: .5s;
+}
+
+.authorise-workspace-table-data:hover {
+  border: 1px solid $primary1;
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.1);
+  cursor: pointer;
+}
+
+.ellipse-border {
+  position: relative;
+  padding-left: 10px;
+}
+
+.ellipse-border:before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(-180deg, rgba(222, 226, 230, 0) 0%, #DEE2E6 49%, rgba(222, 226, 230, 0) 100%);
+  width: 1px;
+  height: 100%;
+}
+
+.workspace-ellipse:hover {
+  cursor: pointer;
+}
+
+.document-name-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.document-name-icon {
+  margin-right: 5px;
+}
+
+.authorise-workspace-table-p {
+  margin: 0;
+}
+
+.navbar > .container, .navbar > .container-fluid, .navbar > .container-lg, .navbar > .container-md, .navbar > .container-sm, .navbar > .container-xl, .navbar > .container-xxl {
+  justify-content: end;
+}
+
+.authorise-section-card {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.02);
+  padding: 1rem;
+  border-radius: 8px;
+  min-height: 100%;
+  margin: 0 10px;
+}

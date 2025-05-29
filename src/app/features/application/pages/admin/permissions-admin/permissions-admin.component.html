@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg">
+  <nz-page-header
+    class="site-page-header"
+    (nzBack)="onBack()"
+    nzBackIcon
+    nzTitle="Go Back"
+    nzSubtitle="Navigate to view all admin functions"
+  >
+    <nz-breadcrumb nz-page-header-breadcrumb>
+      <nz-breadcrumb-item routerLink="../../../workspace">
+        <span nz-icon nzType="home"></span>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        <a routerLink="../">Administration</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>Permissions</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </nz-page-header>
+  <div class="container-fluid">
+    <div class="">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+    </div>
+  </div>
+</nav>

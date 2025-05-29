@@ -1,0 +1,68 @@
+<div class="d-flex flex-column">
+  <div>
+    <nav class="navbar navbar-expand-lg">
+      <nz-page-header
+        class="site-page-header"
+        (nzBack)="onBack()"
+        nzBackIcon
+        nzTitle="Go Back"
+        nzSubtitle="Navigate to your workspace"
+      >
+        <nz-breadcrumb nz-page-header-breadcrumb>
+          <nz-breadcrumb-item routerLink="../workspace">
+            <span nz-icon nzType="home"></span>
+          </nz-breadcrumb-item>
+          <nz-breadcrumb-item>Administration</nz-breadcrumb-item>
+        </nz-breadcrumb>
+      </nz-page-header>
+      <div class="container-fluid">
+        <div class="">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="flex-grow-1">
+    <div nz-row [nzGutter]="[16, 16]" style="padding: 0 10px">
+      <!-- <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="8" nzXl="8">
+    <div class="admin-stats-card" nzTooltipTitle="Manage the system's users" nzTooltipPlacement="bottom" nz-tooltip (click)="navigateTo('users')">
+      <div class="admin-card-img-container">
+        <img class="admin-img" src="/assets/images/illustrations/admin-users.svg" alt="">
+      </div>
+      <div class="admin-card-header">
+        Users
+      </div>
+    </div>
+
+  </div> -->
+      <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="8" nzXl="8">
+        <div
+          class="admin-stats-card"
+          nzTooltipTitle="Manage templates and categories"
+          nzTooltipPlacement="bottom"
+          nz-tooltip
+          (click)="navigateTo('categories')"
+        >
+          <div class="admin-card-img-container">
+            <img
+              class="admin-img"
+              src="/assets/images/illustrations/admin-templates.svg"
+              alt=""
+            />
+          </div>
+          <div class="admin-card-header">Categories</div>
+        </div>
+      </div>
+      <!-- <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="8" nzXl="8">
+    <div class="admin-stats-card" nzTooltipTitle="Manage user access to documents" nzTooltipPlacement="bottom" nz-tooltip (click)="navigateTo('permissions')">
+      <div class="admin-card-img-container">
+        <img class="admin-img" src="/assets/images/illustrations/admin-permissions.svg" alt="">
+      </div>
+      <div class="admin-card-header">
+        Permissions
+      </div>
+    </div>
+  </div> -->
+    </div>
+  </div>
+</div>

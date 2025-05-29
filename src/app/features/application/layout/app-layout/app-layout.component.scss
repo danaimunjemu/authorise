@@ -1,0 +1,139 @@
+@import "colours";
+@import "typography";
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.side-nav-logo {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  // overflow: scroll;
+  padding: 0 20px;
+}
+
+nz-footer {
+  text-align: center;
+  background: transparent;
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  margin: 15px 0 15px 15px; // top right bottom left -> there should be no space between the side nav and the right content, only space on edges
+  max-height: calc(
+    100vh - 30px
+  ); // in case you change margin, subtract top + bottom from 100vh
+  border-radius: 25px;
+  box-shadow: 0 0 2rem rgba(51, 71, 80, 0.1);
+  //background: linear-gradient(135deg,#00bcd4,#2ebd59);
+}
+
+.right-layout {
+  margin-left: 95px;
+  //overflow-y: scroll;
+  height: 100vh;
+  width: calc(100vw - 95px) !important;
+}
+
+.authorise-app-footer {
+  font-family: $font-space-mono;
+  font-size: 12px;
+  transition-duration: 0.5s;
+}
+
+.authorise-app-footer:hover {
+  color: $primary6;
+  cursor: pointer;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+.inner-content {
+  padding: 24px;
+  text-align: center;
+}
+
+.sider-menu {
+  height: unset !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  border-right: 0;
+}
+
+.isupport-side-nav-children {
+  height: calc(100vh - 30px); // same as max height for nz-sider
+  display: flex;
+  margin-top: -0.1px;
+  padding-top: 0.1px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.custom-dropdown-container {
+  .ant-dropdown {
+    top: 40px !important;
+    left: 40px !important;
+  }
+}
+
+.ant-menu-dark .ant-menu-item-selected .ant-menu-item-icon,
+.ant-menu-dark .ant-menu-item-selected .anticon {
+  color: $primary6;
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: transparent;
+}
+
+.navbar > .container,
+.navbar > .container-fluid,
+.navbar > .container-lg,
+.navbar > .container-md,
+.navbar > .container-sm,
+.navbar > .container-xl,
+.navbar > .container-xxl {
+  justify-content: end;
+}
+
+.ant-menu.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+  background: transparent;
+}
+
+.ant-layout {
+  background-image: url("/assets/images/brand/authorise_light_green_BG.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
